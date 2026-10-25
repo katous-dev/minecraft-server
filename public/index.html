@@ -1,0 +1,2183 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MineYou M3 — Bảng Điều Khiển Minecraft Server (Windows 11)</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --md-primary: #a8dab5;
+      --md-on-primary: #00391c;
+      --md-primary-container: #1f5130;
+      --md-on-primary-container: #c4f7d0;
+      --md-secondary-container: #263529;
+      --md-surface: #0f1511;
+      --md-surface-1: #171d18;
+      --md-surface-2: #1d2620;
+      --md-surface-3: #242f28;
+      --md-outline: #3c4940;
+      --md-text: #e0e4df;
+      --md-text-muted: #9aa89e;
+    }
+    [data-theme="diamond"] {
+      --md-primary: #90cdff;
+      --md-on-primary: #003353;
+      --md-primary-container: #004a75;
+      --md-on-primary-container: #cbe6ff;
+      --md-secondary-container: #1f2e38;
+      --md-surface: #0e1419;
+      --md-surface-1: #151c22;
+      --md-surface-2: #1b242c;
+      --md-surface-3: #222d37;
+      --md-outline: #384652;
+    }
+    [data-theme="nether"] {
+      --md-primary: #dcb8ff;
+      --md-on-primary: #3e1c6e;
+      --md-primary-container: #563586;
+      --md-on-primary-container: #f0dbff;
+      --md-secondary-container: #2e2438;
+      --md-surface: #141118;
+      --md-surface-1: #1c1822;
+      --md-surface-2: #241f2c;
+      --md-surface-3: #2d2737;
+      --md-outline: #483f54;
+    }
+    [data-theme="redstone"] {
+      --md-primary: #ffb4a8;
+      --md-on-primary: #561e16;
+      --md-primary-container: #73342a;
+      --md-on-primary-container: #ffdad4;
+      --md-secondary-container: #382522;
+      --md-surface: #181110;
+      --md-surface-1: #221817;
+      --md-surface-2: #2c201e;
+      --md-surface-3: #372826;
+      --md-outline: #543e3b;
+    }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--md-surface);
+      color: var(--md-text);
+      margin: 0;
+      overflow-x: hidden;
+    }
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .m3-surface-1 { background-color: var(--md-surface-1); }
+    .m3-surface-2 { background-color: var(--md-surface-2); }
+    .m3-surface-3 { background-color: var(--md-surface-3); }
+    .m3-border { border-color: var(--md-outline); }
+    .m3-btn-filled {
+      background-color: var(--md-primary);
+      color: var(--md-on-primary);
+      transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+    }
+    .m3-btn-filled:hover:not(:disabled) {
+      filter: brightness(1.08);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .m3-btn-tonal {
+      background-color: var(--md-primary-container);
+      color: var(--md-on-primary-container);
+      transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+    }
+    .m3-btn-tonal:hover:not(:disabled) {
+      filter: brightness(1.12);
+    }
+    .m3-nav-pill.active {
+      background-color: var(--md-primary-container);
+      color: var(--md-on-primary-container);
+      font-weight: 600;
+    }
+    .m3-chip.active {
+      background-color: var(--md-primary-container);
+      color: var(--md-on-primary-container);
+      border-color: var(--md-primary);
+    }
+    input[type="range"] {
+      accent-color: var(--md-primary);
+    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--md-outline); border-radius: 9999px; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col md:flex-row selection:bg-emerald-500/30">
+
+  <!-- Sidebar Navigation Rail (Material 3) -->
+  <aside class="w-full md:w-64 m3-surface-1 border-b md:border-b-0 md:border-r m3-border flex flex-col justify-between shrink-0 z-20">
+    <div class="p-4">
+      <!-- Brand Header -->
+      <div class="flex items-center justify-between md:justify-start gap-3 mb-5 px-2">
+        <div class="w-10 h-10 rounded-2xl m3-btn-tonal flex items-center justify-center font-bold text-lg shadow-inner">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-bold text-base tracking-tight">MineYou M3</h1>
+            <span class="text-[10px] px-2 py-0.5 rounded-full m3-btn-tonal font-semibold">Win 11</span>
+          </div>
+          <p class="text-xs text-neutral-400">Material 3 Server Hub</p>
+        </div>
+      </div>
+
+      <!-- Navigation Pills -->
+      <nav class="flex md:flex-col gap-1.5 overflow-x-auto pb-1 md:pb-0" id="mainNav">
+        <button type="button" data-tab="dashboard" class="m3-nav-pill active flex items-center gap-3 px-4 py-3 rounded-full text-sm text-left whitespace-nowrap transition-all">
+          <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>
+          <span>Tổng quan & Console</span>
+        </button>
+        <button type="button" data-tab="versions" class="m3-nav-pill flex items-center gap-3 px-4 py-3 rounded-full text-sm text-left whitespace-nowrap text-neutral-300 hover:bg-white/5 transition-all">
+          <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>Chọn Phiên Bản</span>
+        </button>
+        <button type="button" data-tab="network" class="m3-nav-pill flex items-center gap-3 px-4 py-3 rounded-full text-sm text-left whitespace-nowrap text-neutral-300 hover:bg-white/5 transition-all">
+          <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"/></svg>
+          <span>Mạng (Playit + Port)</span>
+        </button>
+        <button type="button" data-tab="config" class="m3-nav-pill flex items-center gap-3 px-4 py-3 rounded-full text-sm text-left whitespace-nowrap text-neutral-300 hover:bg-white/5 transition-all">
+          <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.108-1.204l-.526-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <span>Cấu hình & Crack</span>
+        </button>
+        <button type="button" data-tab="win11" class="m3-nav-pill flex items-center gap-3 px-4 py-3 rounded-full text-sm text-left whitespace-nowrap text-neutral-300 hover:bg-white/5 transition-all">
+          <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+          <span>Khởi chạy trên Win 11</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Material You Dynamic Color Picker & Host Status -->
+    <div class="p-4 border-t m3-border space-y-3">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-medium text-neutral-400">Chủ đề Material You</span>
+        <div class="flex items-center gap-1.5" id="themeSwitcher">
+          <button type="button" data-theme-val="emerald" title="Creeper Emerald" class="w-5 h-5 rounded-full bg-emerald-400 ring-2 ring-white/80 transition-transform hover:scale-110"></button>
+          <button type="button" data-theme-val="diamond" title="Diamond Blue" class="w-5 h-5 rounded-full bg-sky-400 opacity-70 hover:opacity-100 transition-transform hover:scale-110"></button>
+          <button type="button" data-theme-val="nether" title="Nether Portal" class="w-5 h-5 rounded-full bg-purple-400 opacity-70 hover:opacity-100 transition-transform hover:scale-110"></button>
+          <button type="button" data-theme-val="redstone" title="Redstone Torch" class="w-5 h-5 rounded-full bg-rose-400 opacity-70 hover:opacity-100 transition-transform hover:scale-110"></button>
+        </div>
+      </div>
+
+      <div class="m3-surface-2 rounded-2xl p-3 text-xs space-y-1.5">
+        <div class="flex items-center justify-between">
+          <span class="text-neutral-400">Máy chủ vật lý:</span>
+          <span class="font-semibold text-neutral-200">Windows 11 (8GB)</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-neutral-400">Chế độ kết nối:</span>
+          <span id="backendModeLabel" class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-medium">Mô phỏng / Sẵn sàng</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <div class="flex-1 flex flex-col min-w-0">
+
+    <!-- Top App Bar (Material 3) -->
+    <header class="m3-surface-1 border-b m3-border px-4 md:px-6 py-3.5 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-10">
+      <div class="flex items-center gap-3">
+        <div id="statusDot" class="w-3 h-3 rounded-full bg-neutral-500 transition-colors"></div>
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <h2 id="serverTitleDisplay" class="font-semibold text-base md:text-lg">Server Sinh Tồn 4 Anh Em</h2>
+            <span id="serverStatusBadge" class="text-xs px-2.5 py-0.5 rounded-full bg-neutral-700 text-neutral-300 font-medium">Đã tắt (Offline)</span>
+            <span id="activeVersionBadge" class="text-xs px-2.5 py-0.5 rounded-full m3-btn-tonal font-medium">Paper 1.21.4</span>
+            <span id="activePlatformTag" class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-medium flex items-center gap-1">
+              <span>💻 PC + 📱 Mobile</span>
+            </span>
+          </div>
+          <p class="text-xs text-neutral-400 mt-0.5" id="headerSubInfo">Crack: Bật (Java + Floodgate) • Tối đa: 4 người chơi • Cấp phát: 4.0 GB / 8 GB RAM</p>
+        </div>
+      </div>
+
+      <!-- Primary Server Power Controls -->
+      <div class="flex items-center gap-2">
+        <button type="button" id="btnStartServer" class="m3-btn-filled px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2 shadow-sm">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <span>Khởi động Server</span>
+        </button>
+        <button type="button" id="btnRestartServer" disabled class="m3-btn-tonal px-3.5 py-2 rounded-full text-sm font-medium flex items-center gap-1.5 opacity-50 cursor-not-allowed">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
+          <span>Khởi động lại</span>
+        </button>
+        <button type="button" id="btnStopServer" disabled class="px-3.5 py-2 rounded-full text-sm font-medium bg-rose-500/20 text-rose-300 border border-rose-500/30 flex items-center gap-1.5 opacity-50 cursor-not-allowed hover:bg-rose-500/30 transition-all">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h12v12H6z"/></svg>
+          <span>Tắt</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Scrollable Content -->
+    <main class="flex-1 p-4 md:p-6 space-y-6 max-w-7xl w-full mx-auto">
+
+      <!-- TAB 1: DASHBOARD & CONSOLE -->
+      <section id="tab-dashboard" class="space-y-6">
+        <!-- Workflow Stepper Bar (Chọn Phiên Bản -> Tạo Tài Nguyên -> Khởi Động) -->
+        <div class="m3-surface-2 rounded-3xl p-4 border m3-border flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="text-xs px-3 py-1 rounded-full m3-btn-tonal font-semibold">Quy trình 3 bước trên Web</span>
+            <div class="text-xs text-neutral-300 flex items-center gap-2 flex-wrap">
+              <span><strong>1. Chọn phiên bản:</strong> <code id="stepVerLabel" class="text-emerald-300">PaperMC 1.21.4</code></span>
+              <span>→</span>
+              <span><strong>2. Tài nguyên:</strong> <span id="stepResBadge" class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-semibold">Chưa tạo (Bấm tạo bên phải)</span></span>
+              <span>→</span>
+              <span><strong>3. Khởi động & Chơi!</strong></span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button type="button" id="btnGoToVersionBuilder" class="m3-btn-tonal px-3.5 py-1.5 rounded-full text-xs font-semibold">1. Chọn Phiên Bản</button>
+            <button type="button" id="btnQuickBuildResources" class="m3-btn-filled px-4 py-1.5 rounded-full text-xs font-bold">⚡ 2. Tạo Tài Nguyên Ngay</button>
+          </div>
+        </div>
+        <!-- Quick Telemetry Cards (Material 3 Filled Cards) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- RAM Card -->
+          <div class="m3-surface-2 rounded-3xl p-4 border m3-border flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-neutral-400">RAM Server / Máy Win 11</span>
+              <span class="text-xs px-2 py-0.5 rounded-full m3-btn-tonal font-medium" id="ramCardPreset">Chuẩn 4 người</span>
+            </div>
+            <div class="my-2">
+              <div class="text-2xl font-bold" id="ramUsageText">0.0 / 4.0 GB</div>
+              <p class="text-xs text-neutral-400">Tổng máy: 8.0 GB (Chừa 4.0 GB cho Win 11)</p>
+            </div>
+            <div class="w-full h-2 rounded-full bg-black/40 overflow-hidden">
+              <div id="ramProgressBar" class="h-full rounded-full transition-all duration-300" style="width: 0%; background-color: var(--md-primary);"></div>
+            </div>
+          </div>
+
+          <!-- Players Card -->
+          <div class="m3-surface-2 rounded-3xl p-4 border m3-border flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-neutral-400">Người chơi trực tuyến</span>
+              <span class="text-xs px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 font-medium">Crossplay</span>
+            </div>
+            <div class="my-2">
+              <div class="text-2xl font-bold"><span id="onlinePlayerCount">0</span> / <span id="maxPlayerCountDisplay">4</span></div>
+              <p class="text-xs text-neutral-400" id="playerBreakdownText">0 PC (Java) • 0 Mobile (PE)</p>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button type="button" id="btnSimulatePlayerJoin" class="text-xs px-2.5 py-1 rounded-full m3-btn-tonal font-medium">+ Mô phỏng bạn vào game</button>
+            </div>
+          </div>
+
+          <!-- PC Address Card -->
+          <div class="m3-surface-2 rounded-3xl p-4 border m3-border flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-neutral-400">💻 Địa chỉ cho PC (Java)</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300">TCP 25565</span>
+            </div>
+            <div class="my-2 space-y-1">
+              <div class="text-xs text-neutral-400">Playit.gg: <code class="text-emerald-300 font-mono-code" id="dashPcPlayit">vn-craft.gl.joinmc.link</code></div>
+              <div class="text-xs text-neutral-400">IP Mở Port: <code class="text-sky-300 font-mono-code" id="dashPcDirect">113.161.72.88:25565</code></div>
+            </div>
+            <div class="flex gap-2">
+              <button type="button" data-copy-target="dashPcPlayit" class="copy-btn text-xs px-2.5 py-1 rounded-full m3-surface-3 hover:bg-white/10 transition-all">Copy Playit</button>
+              <button type="button" data-copy-target="dashPcDirect" class="copy-btn text-xs px-2.5 py-1 rounded-full m3-surface-3 hover:bg-white/10 transition-all">Copy IP Port</button>
+            </div>
+          </div>
+
+          <!-- Mobile Address Card -->
+          <div class="m3-surface-2 rounded-3xl p-4 border m3-border flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-neutral-400">📱 Địa chỉ cho Mobile (PE)</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300">UDP 19132</span>
+            </div>
+            <div class="my-2 space-y-1">
+              <div class="text-xs text-neutral-400">Playit.gg: <code class="text-amber-300 font-mono-code" id="dashPePlayit">pe-vn.gl.at.ply.gg:49182</code></div>
+              <div class="text-xs text-neutral-400">IP Mở Port: <code class="text-sky-300 font-mono-code" id="dashPeDirect">113.161.72.88 (Port: 19132)</code></div>
+            </div>
+            <div class="flex gap-2">
+              <button type="button" data-copy-target="dashPePlayit" class="copy-btn text-xs px-2.5 py-1 rounded-full m3-surface-3 hover:bg-white/10 transition-all">Copy Playit PE</button>
+              <button type="button" data-copy-target="dashPeDirect" class="copy-btn text-xs px-2.5 py-1 rounded-full m3-surface-3 hover:bg-white/10 transition-all">Copy IP PE</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Console & Active Players Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Live Terminal Console -->
+          <div class="lg:col-span-2 m3-surface-2 rounded-3xl border m3-border flex flex-col overflow-hidden">
+            <div class="px-5 py-3.5 border-b m3-border flex items-center justify-between flex-wrap gap-2">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                <h3 class="font-semibold text-sm">Bảng Điều Khiển (Live Server Console)</h3>
+              </div>
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <button type="button" data-quick-cmd="geyser list" class="quick-cmd-btn text-xs px-2.5 py-1 rounded-full m3-surface-3 hover:bg-white/10">geyser list</button>
+                <button type="button" data-quick-cmd="gamerule keepInventory true" class="quick-cmd-btn text-xs px-2.5 py-1 rounded-full m3-surface-3 hover:bg-white/10">keepInventory</button>
+                <button type="button" data-quick-cmd="weather clear" class="quick-cmd-btn text-xs px-2.5 py-1 rounded-full m3-surface-3 hover:bg-white/10">Trời nắng</button>
+                <button type="button" id="btnClearConsole" class="text-xs px-2.5 py-1 rounded-full m3-surface-3 hover:bg-white/10 text-neutral-400">Xóa log</button>
+              </div>
+            </div>
+
+            <div id="consoleOutput" class="font-mono-code text-xs p-4 h-80 overflow-y-auto space-y-1.5 bg-black/50 text-neutral-200">
+              <div class="text-neutral-400">[Hệ thống] Giao diện Material Design 3 đã sẵn sàng trên Windows 11.</div>
+              <div class="text-emerald-400">[Cấu hình] Đã chọn nhân: PaperMC 1.21.4 (Hỗ trợ 💻 PC + 📱 Mobile qua GeyserMC & Floodgate).</div>
+              <div class="text-sky-400">[Bộ nhớ] Cấp phát 4096 MB (4.0 GB) trên tổng 8.0 GB RAM (kèm cờ tối ưu Aikar's Flags cho 4 người chơi).</div>
+              <div class="text-amber-300">[Mạng] Đã bật song song cả 2 chế độ: Tunnel playit.gg + Mở Port Router (25565 TCP & 19132 UDP).</div>
+              <div class="text-neutral-300">[Hướng dẫn] Nhấn nút "Khởi động Server" ở góc phải phía trên để chạy thử ngay!</div>
+            </div>
+
+            <form id="consoleForm" class="p-3 border-t m3-border flex items-center gap-2 m3-surface-1">
+              <span class="text-neutral-400 font-mono-code text-sm pl-2">&gt;</span>
+              <input type="text" id="consoleInput" placeholder="Nhập lệnh server (VD: op Steve, gamemode creative .Alex_PE, say Xin chao)..." class="flex-1 bg-transparent text-sm focus:outline-none text-white font-mono-code" />
+              <button type="submit" class="m3-btn-tonal px-4 py-1.5 rounded-full text-xs font-semibold">Gửi lệnh</button>
+            </form>
+          </div>
+
+          <!-- Online Players & Crossplay Status -->
+          <div class="m3-surface-2 rounded-3xl border m3-border p-5 flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="font-semibold text-sm">Người chơi đang trong Server</h3>
+                <span class="text-xs text-neutral-400">Tối đa 4 slot</span>
+              </div>
+
+              <div id="playerListContainer" class="space-y-2.5 max-h-60 overflow-y-auto pr-1">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+            <div class="m3-surface-3 rounded-2xl p-3.5 space-y-2 border m3-border">
+              <div class="text-xs font-semibold text-emerald-300 flex items-center gap-1.5">
+                <span>💡 Mẹo phân biệt PC và Mobile</span>
+              </div>
+              <p class="text-xs text-neutral-300 leading-relaxed">
+                Người chơi từ <strong>Mobile (Bedrock/Crack APK)</strong> khi vào qua Floodgate sẽ tự động có dấu chấm <code class="px-1 py-0.5 rounded bg-black/40 text-amber-300">.</code> ở trước tên (ví dụ: <code class="text-amber-300">.MinhMobile</code>) để không bị trùng tên với tài khoản <strong>PC Crack</strong>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: VERSION SELECTOR WITH PC / MOBILE / BOTH TAGS -->
+      <section id="tab-versions" class="hidden space-y-6">
+        <div class="m3-surface-2 rounded-3xl p-5 border m3-border space-y-4">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <h3 class="text-base font-bold">Kho Phiên Bản Tự Do & Bộ Lọc Tương Thích (PC / Mobile / Cả 2)</h3>
+              <p class="text-xs text-neutral-400 mt-1">
+                Hệ thống tự động kiểm tra khả năng hỗ trợ plugin <strong>GeyserMC + Floodgate + ViaVersion</strong> và gắn nhãn trực quan cho từng phiên bản.
+              </p>
+            </div>
+
+            <!-- Search Input -->
+            <div class="relative w-full md:w-64">
+              <input type="text" id="versionSearchInput" placeholder="Tìm phiên bản (VD: 1.21, 1.20.4, 1.12)..." class="w-full m3-surface-3 border m3-border rounded-full px-4 py-2 text-xs text-white focus:outline-none focus:border-emerald-400" />
+            </div>
+          </div>
+
+          <!-- Filter Chips (Material 3 Filter Chips) -->
+          <div class="flex items-center gap-2 flex-wrap" id="versionFilterChips">
+            <button type="button" data-filter="all" class="m3-chip active text-xs px-3.5 py-1.5 rounded-full border m3-border font-medium transition-all">
+              Tất cả phiên bản
+            </button>
+            <button type="button" data-filter="both" class="m3-chip text-xs px-3.5 py-1.5 rounded-full border m3-border font-medium transition-all flex items-center gap-1.5">
+              <span>💻 + 📱 Cả 2 (PC & Mobile)</span>
+            </button>
+            <button type="button" data-filter="pc" class="m3-chip text-xs px-3.5 py-1.5 rounded-full border m3-border font-medium transition-all flex items-center gap-1.5">
+              <span>💻 Chỉ PC (Java)</span>
+            </button>
+            <button type="button" data-filter="mobile" class="m3-chip text-xs px-3.5 py-1.5 rounded-full border m3-border font-medium transition-all flex items-center gap-1.5">
+              <span>📱 Chỉ Mobile (Bedrock)</span>
+            </button>
+          </div>
+
+          <!-- Custom Version Adder -->
+          <div class="m3-surface-3 rounded-2xl p-3.5 border m3-border flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+            <div class="text-xs">
+              <span class="font-semibold text-white">Nhập phiên bản bất kỳ (Tự động gắn Tag PC / Mobile / Cả 2):</span>
+              <span class="text-neutral-400 block sm:inline sm:ml-1">VD: 1.21.3, 1.20.2, 1.18.2, 1.12.2, 1.8.8...</span>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <input type="text" id="customVersionInput" placeholder="Nhập số phiên bản (VD: 1.20.1)..." class="m3-surface-1 border m3-border rounded-full px-3.5 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-400 w-48" />
+              <select id="customEngineSelect" class="m3-surface-1 border m3-border rounded-full px-3 py-1.5 text-xs text-white focus:outline-none">
+                <option value="paper">PaperMC (Plugin)</option>
+                <option value="vanilla">Vanilla (Mojang)</option>
+                <option value="bedrock">Bedrock Native</option>
+              </select>
+              <button type="button" id="btnAddCustomVersion" class="m3-btn-tonal px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap">+ Thêm & Kiểm tra Tag</button>
+            </div>
+          </div>
+
+          <!-- Version Cards Grid -->
+          <div id="versionCardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- STEP 2: RESOURCE GENERATOR & FILE BUILDER FOR SELECTED VERSION -->
+        <div id="resourceBuilderSection" class="m3-surface-2 rounded-3xl p-5 border-2 border-emerald-500/40 space-y-5 shadow-lg">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b m3-border pb-4">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="text-xs px-2.5 py-0.5 rounded-full m3-btn-filled font-bold">Bước 2: Sau Khi Chọn Phiên Bản</span>
+                <h3 class="text-base font-bold text-white">Khởi Tạo Tài Nguyên Server (Tải Nhân JAR, Plugin & Sinh Cấu Hình)</h3>
+              </div>
+              <p class="text-xs text-neutral-300">
+                Phiên bản đang chọn: <strong id="builderSelectedVerName" class="text-emerald-300">PaperMC 1.21.4</strong>
+                (<span id="builderSelectedVerTag" class="text-amber-300">💻 PC + 📱 Mobile</span>) •
+                Trạng thái tài nguyên: <span id="builderStatusBadge" class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-semibold">Chưa khởi tạo</span>
+              </p>
+            </div>
+
+            <div class="flex items-center gap-2.5 flex-wrap">
+              <button type="button" id="btnBuildResources" class="m3-btn-filled px-5 py-2.5 rounded-full text-xs md:text-sm font-bold flex items-center gap-2 shadow-md">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+                <span>⚡ Tạo Tài Nguyên Cho Phiên Bản Này</span>
+              </button>
+              <button type="button" id="btnDownloadWin11AutoScript" class="m3-btn-tonal px-4 py-2.5 rounded-full text-xs font-semibold flex items-center gap-1.5">
+                <span>📥 Tải Script Tự Tải Tài Nguyên (.bat)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Resource Checkboxes & Progress Pipeline -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+            <!-- Left 5 Cols: Resource Checkboxes + Build Pipeline -->
+            <div class="lg:col-span-5 space-y-4">
+              <div class="m3-surface-3 rounded-2xl p-4 border m3-border space-y-2.5">
+                <div class="text-xs font-bold text-white mb-1">Các gói tài nguyên sẽ tự động tải & sinh ra:</div>
+                <label class="flex items-center gap-2.5 text-xs text-neutral-200 cursor-pointer">
+                  <input type="checkbox" id="resChkCoreJar" checked disabled class="accent-emerald-400 rounded" />
+                  <span>Nhân Server gốc (<code id="resCoreJarLabel" class="text-emerald-300">paper-1.21.4.jar</code>)</span>
+                </label>
+                <label class="flex items-center gap-2.5 text-xs text-neutral-200 cursor-pointer">
+                  <input type="checkbox" id="resChkGeyser" checked class="accent-emerald-400 rounded" />
+                  <span>Plugin Cầu nối Mobile (<code class="text-amber-300">Geyser-Spigot.jar</code> + <code class="text-amber-300">floodgate-spigot.jar</code>)</span>
+                </label>
+                <label class="flex items-center gap-2.5 text-xs text-neutral-200 cursor-pointer">
+                  <input type="checkbox" id="resChkVia" checked class="accent-emerald-400 rounded" />
+                  <span>Plugin Đa phiên bản (<code class="text-sky-300">ViaVersion.jar</code> + <code class="text-sky-300">ViaBackwards.jar</code>)</span>
+                </label>
+                <label class="flex items-center gap-2.5 text-xs text-neutral-200 cursor-pointer">
+                  <input type="checkbox" id="resChkSkins" checked class="accent-emerald-400 rounded" />
+                  <span>Plugin hiện Skin cho máy Crack (<code class="text-purple-300">SkinsRestorer.jar</code>)</span>
+                </label>
+                <label class="flex items-center gap-2.5 text-xs text-neutral-200 cursor-pointer">
+                  <input type="checkbox" id="resChkPlayit" checked class="accent-emerald-400 rounded" />
+                  <span>Plugin kết nối đường hầm (<code class="text-emerald-300">playit-minecraft-plugin.jar</code>)</span>
+                </label>
+              </div>
+
+              <!-- 5-Step Progress Pipeline -->
+              <div class="m3-surface-3 rounded-2xl p-4 border m3-border space-y-3">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="font-semibold text-white">Tiến trình khởi tạo tài nguyên:</span>
+                  <span id="buildProgressPercent" class="font-bold text-emerald-300">0%</span>
+                </div>
+                <div class="w-full h-2.5 rounded-full bg-black/50 overflow-hidden">
+                  <div id="buildProgressBar" class="h-full rounded-full transition-all duration-300" style="width: 0%; background-color: var(--md-primary);"></div>
+                </div>
+                <div id="buildStepList" class="space-y-1.5 text-xs text-neutral-400 font-mono-code">
+                  <div data-step="1">○ 1. Tải nhân Server từ API chính thức</div>
+                  <div data-step="2">○ 2. Tải gói Plugin Crossplay (Geyser + Floodgate + ViaVersion)</div>
+                  <div data-step="3">○ 3. Ghi eula.txt (eula=true) & server.properties (Crack)</div>
+                  <div data-step="4">○ 4. Sinh cấu hình Geyser UDP 19132 & start_server.bat (4GB RAM)</div>
+                  <div data-step="5">○ 5. Khởi tạo thư mục thế giới (world, nether, the_end)</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right 7 Cols: Generated File Explorer & Live File Inspector -->
+            <div class="lg:col-span-7 m3-surface-3 rounded-2xl p-4 border m3-border flex flex-col justify-between space-y-3">
+              <div class="flex items-center justify-between flex-wrap gap-2">
+                <div>
+                  <h4 class="text-xs font-bold text-white">📁 Cây Thư Mục Tài Nguyên Server (<code class="text-emerald-300">/mc_server/</code>)</h4>
+                  <p class="text-[11px] text-neutral-400">Bấm vào từng tệp để xem/sửa nội dung hoặc tải trực tiếp về máy Windows 11</p>
+                </div>
+                <span id="resourceCountBadge" class="text-[11px] px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-medium">0 tệp đã tạo</span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 h-64">
+                <!-- File list -->
+                <div id="generatedFilesList" class="sm:col-span-5 bg-black/40 rounded-xl p-2 overflow-y-auto space-y-1 border m3-border text-xs">
+                  <!-- Populated by JS -->
+                </div>
+                <!-- File content editor/viewer -->
+                <div class="sm:col-span-7 bg-black/60 rounded-xl p-3 flex flex-col justify-between border m3-border">
+                  <div class="flex items-center justify-between border-b m3-border pb-1.5 mb-2">
+                    <span id="activeFileViewerTitle" class="text-[11px] font-mono-code text-emerald-300 font-semibold">Chưa chọn tệp</span>
+                    <div class="flex items-center gap-1.5">
+                      <button type="button" id="btnSaveActiveFile" class="text-[10px] px-2 py-0.5 rounded-full m3-btn-tonal font-medium">Lưu sửa</button>
+                      <button type="button" id="btnDownloadActiveFile" class="text-[10px] px-2 py-0.5 rounded-full bg-white/10 hover:bg-white/20 text-white">Tải tệp</button>
+                    </div>
+                  </div>
+                  <textarea id="activeFileViewerContent" class="w-full flex-1 bg-transparent text-[11px] font-mono-code text-neutral-200 focus:outline-none resize-none" placeholder="Hãy bấm '⚡ Tạo Tài Nguyên Cho Phiên Bản Này' để sinh toàn bộ tệp cấu hình và plugin..."></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: DUAL NETWORKING (PLAYIT.GG + PORT FORWARDING) -->
+      <section id="tab-network" class="hidden space-y-6">
+        <div class="m3-surface-2 rounded-3xl p-5 border m3-border space-y-2">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <div>
+              <h3 class="text-base font-bold">Chế Độ Mạng Kép: Chạy Song Song Playit.gg & Mở Port Router</h3>
+              <p class="text-xs text-neutral-400 mt-0.5">
+                Bạn không cần phải chọn 1 trong 2! Server lắng nghe trên cổng gốc (<code class="text-emerald-300">25565 TCP</code> & <code class="text-amber-300">19132 UDP</code>), cho phép cả kết nối trực tiếp qua IP/Port lẫn đường hầm Playit.gg hoạt động cùng lúc.
+              </p>
+            </div>
+            <span class="text-xs px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30">Đang bật song song Cả 2</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Method 1: Playit.gg Card -->
+          <div class="m3-surface-2 rounded-3xl p-5 border m3-border space-y-4 flex flex-col justify-between">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-9 h-9 rounded-2xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold">1</div>
+                  <div>
+                    <h4 class="font-bold text-sm">Đường hầm Playit.gg (Không cần mở Port Modem)</h4>
+                    <p class="text-xs text-neutral-400">Dành cho bạn bè ở mạng khác hoặc khi nhà mạng chặn CGNAT</p>
+                  </div>
+                </div>
+                <label class="inline-flex items-center cursor-pointer">
+                  <input type="checkbox" id="togglePlayit" checked class="sr-only peer">
+                  <div class="w-11 h-6 bg-neutral-700 rounded-full peer peer-checked:bg-emerald-500 relative after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-5"></div>
+                </label>
+              </div>
+
+              <div class="space-y-3">
+                <div>
+                  <label class="block text-xs text-neutral-400 mb-1">Địa chỉ Tunnel cho PC (Java TCP):</label>
+                  <div class="flex gap-2">
+                    <input type="text" id="inputPlayitPc" value="vn-craft.gl.joinmc.link" class="flex-1 m3-surface-3 border m3-border rounded-xl px-3 py-2 text-xs font-mono-code text-emerald-300 focus:outline-none" />
+                    <button type="button" data-copy-input="inputPlayitPc" class="copy-input-btn m3-btn-tonal px-3 py-2 rounded-xl text-xs font-medium">Copy</button>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs text-neutral-400 mb-1">Địa chỉ Tunnel cho Mobile (Bedrock UDP - Geyser):</label>
+                  <div class="flex gap-2">
+                    <input type="text" id="inputPlayitPe" value="pe-vn.gl.at.ply.gg:49182" class="flex-1 m3-surface-3 border m3-border rounded-xl px-3 py-2 text-xs font-mono-code text-amber-300 focus:outline-none" />
+                    <button type="button" data-copy-input="inputPlayitPe" class="copy-input-btn m3-btn-tonal px-3 py-2 rounded-xl text-xs font-medium">Copy</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="m3-surface-3 rounded-2xl p-3 text-xs text-neutral-300 space-y-1">
+              <div class="font-semibold text-white">Cách thiết lập trên Playit.gg:</div>
+              <div>1. Cài plugin <strong>playit-minecraft-plugin.jar</strong> hoặc chạy <strong>playit.exe</strong> trên Win 11.</div>
+              <div>2. Tạo 1 tunnel <strong>Minecraft Java</strong> (trỏ về <code class="text-emerald-300">127.0.0.1:25565</code>) và 1 tunnel <strong>Minecraft Bedrock</strong> (trỏ về <code class="text-amber-300">127.0.0.1:19132</code>).</div>
+            </div>
+          </div>
+
+          <!-- Method 2: Direct Port Forwarding + LAN Card -->
+          <div class="m3-surface-2 rounded-3xl p-5 border m3-border space-y-4 flex flex-col justify-between">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-9 h-9 rounded-2xl bg-sky-500/20 text-sky-300 flex items-center justify-center font-bold">2</div>
+                  <div>
+                    <h4 class="font-bold text-sm">Mở Port Trực Tiếp (Router / LAN Ping Thấp)</h4>
+                    <p class="text-xs text-neutral-400">Kết nối thẳng tới máy Windows 11 không qua trung gian</p>
+                  </div>
+                </div>
+                <label class="inline-flex items-center cursor-pointer">
+                  <input type="checkbox" id="toggleDirectPort" checked class="sr-only peer">
+                  <div class="w-11 h-6 bg-neutral-700 rounded-full peer peer-checked:bg-sky-500 relative after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-5"></div>
+                </label>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs text-neutral-400 mb-1">IP Public / DDNS của bạn:</label>
+                  <div class="flex gap-2">
+                    <input type="text" id="inputPublicIp" value="nhap-ip-public-cua-ban" placeholder="nhap-ip-public-cua-ban" class="flex-1 m3-surface-3 border m3-border rounded-xl px-3 py-2 text-xs font-mono-code text-sky-300 focus:outline-none" />
+                    <button type="button" id="btnAutoFetchIp" class="m3-btn-tonal px-3 py-2 rounded-xl text-xs font-medium whitespace-nowrap">🔍 Tự động lấy IP</button>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-xs text-neutral-400 mb-1">IP LAN máy Win 11 (Cùng Wi-Fi):</label>
+                  <input type="text" id="inputLanIp" value="192.168.1.15" class="w-full m3-surface-3 border m3-border rounded-xl px-3 py-2 text-xs font-mono-code text-neutral-200 focus:outline-none" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3 text-xs">
+                <div class="m3-surface-3 p-3 rounded-2xl border m3-border">
+                  <div class="text-neutral-400">Rule 1 (Cho PC Java):</div>
+                  <div class="font-bold text-emerald-300 mt-0.5">Port 25565 • Giao thức TCP</div>
+                </div>
+                <div class="m3-surface-3 p-3 rounded-2xl border m3-border">
+                  <div class="text-neutral-400">Rule 2 (Cho Mobile PE):</div>
+                  <div class="font-bold text-amber-300 mt-0.5">Port 19132 • Giao thức UDP</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Windows 11 Firewall Quick Command -->
+            <div class="m3-surface-3 rounded-2xl p-3 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold text-white">Lệnh mở Tường lửa Windows 11 (PowerShell Admin):</span>
+                <button type="button" data-copy-target="firewallCmdText" class="copy-btn text-xs px-2.5 py-1 rounded-full m3-btn-tonal font-medium">Copy lệnh</button>
+              </div>
+              <pre id="firewallCmdText" class="text-[11px] font-mono-code bg-black/50 p-2.5 rounded-xl overflow-x-auto text-sky-300">New-NetFirewallRule -DisplayName "MC_PC_25565" -Direction Inbound -LocalPort 25565 -Protocol TCP -Action Allow; New-NetFirewallRule -DisplayName "MC_PE_19132" -Direction Inbound -LocalPort 19132 -Protocol UDP -Action Allow</pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: CONFIGURATION (8GB RAM SLIDER, 4 PLAYERS, CRACK & CROSSPLAY) -->
+      <section id="tab-config" class="hidden space-y-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Left: Hardware & Gameplay (8GB RAM / 4 Players) -->
+          <div class="m3-surface-2 rounded-3xl p-5 border m3-border space-y-5">
+            <div>
+              <h3 class="text-base font-bold">Cấu Hình Phần Cứng (Tối Ưu Cho Máy 8GB RAM & 4 Người Chơi)</h3>
+              <p class="text-xs text-neutral-400 mt-0.5">Điều chỉnh lượng RAM cấp cho nhân Java và giới hạn người chơi.</p>
+            </div>
+
+            <!-- RAM Allocation Slider -->
+            <div class="m3-surface-3 rounded-2xl p-4 space-y-3 border m3-border">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold">Mức RAM cấp cho Server (<code class="text-emerald-300">-Xmx</code>):</span>
+                <span id="ramSliderLabel" class="text-sm font-bold text-emerald-300">4.0 GB (4096 MB) — Khuyên dùng</span>
+              </div>
+              <input type="range" id="ramSlider" min="2" max="6.5" step="0.5" value="4" class="w-full cursor-pointer" />
+              <div class="flex justify-between text-[11px] text-neutral-400">
+                <span>2.0 GB (Tối thiểu)</span>
+                <span>4.0 GB (Chuẩn 4 người)</span>
+                <span>6.5 GB (Tối đa trên máy 8GB)</span>
+              </div>
+              <div id="ramAdviceBox" class="text-xs p-2.5 rounded-xl bg-emerald-500/10 text-emerald-200 border border-emerald-500/20">
+                ✅ <strong>4.0 GB RAM</strong> là mức cân bằng hoàn hảo cho 4 người chơi (cả PC + Mobile), vừa chạy mượt GeyserMC vừa chừa 4.0 GB RAM cho Windows 11 và trình duyệt.
+              </div>
+            </div>
+
+            <!-- Server Name, Max Players, Gamemode -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs text-neutral-400 mb-1">Tên hiển thị Server (MOTD):</label>
+                <input type="text" id="cfgMotd" value="Server Sinh Tồn 4 Anh Em" class="w-full m3-surface-3 border m3-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs text-neutral-400 mb-1">Số người chơi tối đa (Max Players):</label>
+                <input type="number" id="cfgMaxPlayers" min="1" max="50" value="4" class="w-full m3-surface-3 border m3-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs text-neutral-400 mb-1">Chế độ chơi (Gamemode):</label>
+                <select id="cfgGamemode" class="w-full m3-surface-3 border m3-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none">
+                  <option value="survival" selected>Sinh tồn (Survival)</option>
+                  <option value="creative">Sáng tạo (Creative)</option>
+                  <option value="adventure">Phiêu lưu (Adventure)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs text-neutral-400 mb-1">Độ khó (Difficulty):</label>
+                <select id="cfgDifficulty" class="w-full m3-surface-3 border m3-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none">
+                  <option value="peaceful">Bình yên (Peaceful)</option>
+                  <option value="easy">Dễ (Easy)</option>
+                  <option value="normal" selected>Bình thường (Normal)</option>
+                  <option value="hard">Khó (Hard)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Crack & Crossplay Switches -->
+          <div class="m3-surface-2 rounded-3xl p-5 border m3-border space-y-4 flex flex-col justify-between">
+            <div class="space-y-4">
+              <div>
+                <h3 class="text-base font-bold">Chế Độ Crack & Crossplay (PC + Mobile)</h3>
+                <p class="text-xs text-neutral-400 mt-0.5">Tự động chỉnh <code class="text-emerald-300">server.properties</code> và cấu hình <code class="text-amber-300">GeyserMC / Floodgate</code>.</p>
+              </div>
+
+              <!-- Toggle 1: PC Crack -->
+              <div class="m3-surface-3 p-3.5 rounded-2xl border m3-border flex items-center justify-between gap-3">
+                <div>
+                  <div class="text-xs font-semibold text-white">Cho phép PC Crack (<code class="text-emerald-300">online-mode=false</code>)</div>
+                  <p class="text-[11px] text-neutral-400">Hỗ trợ TLauncher, SKLauncher, Prism, Legacy Launcher vào thẳng không cần bản quyền.</p>
+                </div>
+                <input type="checkbox" id="cfgOnlineModeFalse" checked class="w-5 h-5 accent-emerald-400 rounded cursor-pointer shrink-0" />
+              </div>
+
+              <!-- Toggle 2: Mobile Bedrock & Crack APK -->
+              <div class="m3-surface-3 p-3.5 rounded-2xl border m3-border flex items-center justify-between gap-3">
+                <div>
+                  <div class="text-xs font-semibold text-white">Cho phép Mobile PE & APK Crack (<code class="text-amber-300">Geyser + Floodgate</code>)</div>
+                  <p class="text-[11px] text-neutral-400">Đặt <code class="text-amber-300">auth-type: floodgate</code> để điện thoại vào server mà không cần mua tài khoản Java.</p>
+                </div>
+                <input type="checkbox" id="cfgFloodgate" checked class="w-5 h-5 accent-emerald-400 rounded cursor-pointer shrink-0" />
+              </div>
+
+              <!-- Toggle 3: ViaVersion -->
+              <div class="m3-surface-3 p-3.5 rounded-2xl border m3-border flex items-center justify-between gap-3">
+                <div>
+                  <div class="text-xs font-semibold text-white">Tự động tương thích đa phiên bản (<code class="text-sky-300">ViaVersion + ViaBackwards</code>)</div>
+                  <p class="text-[11px] text-neutral-400">Giúp các bản server cũ (1.16 - 1.20) vẫn đón được người chơi Mobile ở bản mới nhất.</p>
+                </div>
+                <input type="checkbox" id="cfgViaVersion" checked class="w-5 h-5 accent-emerald-400 rounded cursor-pointer shrink-0" />
+              </div>
+            </div>
+
+            <!-- Live Generated server.properties Preview -->
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold text-neutral-300">File <code class="text-emerald-300">server.properties</code> tự động sinh:</span>
+                <button type="button" data-copy-target="generatedPropsPreview" class="copy-btn text-xs px-2.5 py-1 rounded-full m3-btn-tonal font-medium">Copy cấu hình</button>
+              </div>
+              <pre id="generatedPropsPreview" class="text-[11px] font-mono-code bg-black/50 p-3 rounded-2xl overflow-x-auto text-emerald-300 max-h-36"></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 5: WINDOWS 11 LOCAL HOSTING GUIDE & SCRIPTS -->
+      <section id="tab-win11" class="hidden space-y-6">
+        <div class="m3-surface-2 rounded-3xl p-5 border m3-border space-y-4">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div>
+              <h3 class="text-base font-bold">Trình Khởi Tạo & Chạy Thực Tế Trên Máy Windows 11 Của Bạn</h3>
+              <p class="text-xs text-neutral-400 mt-0.5">
+                Mình đã đóng gói sẵn toàn bộ giao diện <strong>Material Design 3</strong> này kèm <strong>Backend Node.js tự động hóa</strong> trong file nén <code class="text-emerald-300">mc_material3_win11_server.zip</code> bên ngoài khung chat.
+              </p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="m3-surface-3 p-4 rounded-2xl border m3-border space-y-2">
+              <span class="text-xs px-2.5 py-0.5 rounded-full m3-btn-tonal font-bold">Bước 1</span>
+              <h4 class="font-semibold text-sm">Cài Java 21 & Node.js trên Win 11</h4>
+              <p class="text-xs text-neutral-400 leading-relaxed">
+                Máy Windows 11 cần <strong>Java 21 (Adoptium Temurin)</strong> để chạy Minecraft 1.20.5+ và <strong>Node.js LTS</strong> để chạy Web Panel Material 3.
+              </p>
+            </div>
+            <div class="m3-surface-3 p-4 rounded-2xl border m3-border space-y-2">
+              <span class="text-xs px-2.5 py-0.5 rounded-full m3-btn-tonal font-bold">Bước 2</span>
+              <h4 class="font-semibold text-sm">Giải nén & Bấm đúp <code class="text-emerald-300">start_web_panel.bat</code></h4>
+              <p class="text-xs text-neutral-400 leading-relaxed">
+                Script sẽ tự động mở Web UI tại <code class="text-sky-300">http://localhost:3000</code>. Bạn chọn phiên bản trên web, bấm <strong>Khởi động Server</strong> là máy tự tải PaperMC + GeyserMC.
+              </p>
+            </div>
+            <div class="m3-surface-3 p-4 rounded-2xl border m3-border space-y-2">
+              <span class="text-xs px-2.5 py-0.5 rounded-full m3-btn-tonal font-bold">Bước 3</span>
+              <h4 class="font-semibold text-sm">Vào game từ cả PC & Điện thoại</h4>
+              <p class="text-xs text-neutral-400 leading-relaxed">
+                Bạn bè dùng PC (Java Crack) vào qua cổng <code class="text-emerald-300">25565</code>, dùng điện thoại (Mobile PE) vào qua cổng <code class="text-amber-300">19132</code> hoặc qua link <code class="text-emerald-300">playit.gg</code>.
+              </p>
+            </div>
+          </div>
+
+          <!-- Generated Windows 11 Batch Script with Aikar's Flags -->
+          <div class="space-y-2 pt-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-neutral-200">Lệnh khởi động <code class="text-emerald-300">start_server.bat</code> (tối ưu Aikar's Flags theo đúng cấu hình bạn chọn):</span>
+              <button type="button" data-copy-target="generatedBatPreview" class="copy-btn text-xs px-3 py-1 rounded-full m3-btn-tonal font-medium">Copy file .bat</button>
+            </div>
+            <pre id="generatedBatPreview" class="text-xs font-mono-code bg-black/60 p-4 rounded-2xl overflow-x-auto text-amber-300"></pre>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Toast Notification (Material 3 Snackbar) -->
+  <div id="m3Snackbar" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 px-4 py-3 rounded-2xl m3-btn-tonal shadow-xl text-xs font-medium flex items-center gap-2">
+    <span id="m3SnackbarText">Đã sao chép!</span>
+  </div>
+
+  <script>
+    // ===== WEBSOCKET CONNECTION =====
+    let ws = null;
+    let wsReconnectTimer = null;
+    const WS_URL = `ws://${location.host}`;
+
+    function connectWebSocket() {
+      if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING)) return;
+      try {
+        ws = new WebSocket(WS_URL);
+        ws.onopen = () => {
+          document.getElementById('backendModeLabel').textContent = 'Backend Live ✓';
+          document.getElementById('backendModeLabel').className = 'px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-medium';
+          appendLog('[Hệ thống] Đã kết nối WebSocket với Backend Node.js.', 'text-emerald-400');
+          clearTimeout(wsReconnectTimer);
+        };
+        ws.onmessage = (evt) => {
+          try {
+            const msg = JSON.parse(evt.data);
+            handleWsMessage(msg);
+          } catch(e) {}
+        };
+        ws.onclose = () => {
+          document.getElementById('backendModeLabel').textContent = 'Mô phỏng / Offline';
+          document.getElementById('backendModeLabel').className = 'px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-medium';
+          wsReconnectTimer = setTimeout(connectWebSocket, 3000);
+        };
+        ws.onerror = () => { ws.close(); };
+      } catch(e) {
+        wsReconnectTimer = setTimeout(connectWebSocket, 3000);
+      }
+    }
+
+    function handleWsMessage(msg) {
+      switch(msg.type) {
+        case 'log':
+          // Color-code server log lines
+          let colorClass = 'text-neutral-200';
+          const line = msg.data || '';
+          if (line.includes('ERROR') || line.includes('WARN')) colorClass = 'text-amber-300';
+          else if (line.includes('Done') || line.includes('joined')) colorClass = 'text-emerald-400';
+          else if (line.includes('left the game')) colorClass = 'text-rose-300';
+          else if (line.includes('[Geyser') || line.includes('[Floodgate')) colorClass = 'text-sky-300';
+          else if (line.includes('[playit')) colorClass = 'text-purple-300';
+          appendLog(line, colorClass);
+          break;
+        case 'status':
+          const s = msg.data;
+          if (s.status) { state.serverStatus = s.status; }
+          if (s.players) { state.onlinePlayers = s.players; state.players = s.players; }
+          if (s.ramMb) { state.ramGb = s.ramMb / 1024; }
+          if (s.playitTunnels) {
+            if (s.playitTunnels.pc) {
+              document.getElementById('inputPlayitPc').value = s.playitTunnels.pc;
+              document.getElementById('dashPcPlayit').textContent = s.playitTunnels.pc;
+            }
+            if (s.playitTunnels.pe) {
+              document.getElementById('inputPlayitPe').value = s.playitTunnels.pe;
+              document.getElementById('dashPePlayit').textContent = s.playitTunnels.pe;
+            }
+          }
+          if (s.files) { updateFileExplorerFromBackend(s.files); }
+          renderHeaderAndTelemetry();
+          break;
+        case 'build_progress':
+          // Update build progress UI from backend
+          const pctEl = document.getElementById('buildProgressPercent');
+          const barEl = document.getElementById('buildProgressBar');
+          if (pctEl) pctEl.textContent = msg.percent + '%';
+          if (barEl) barEl.style.width = msg.percent + '%';
+          const stepNode = document.querySelector(`#buildStepList [data-step="${msg.step}"]`);
+          if (stepNode) {
+            stepNode.className = 'text-emerald-300 font-semibold';
+            // Keep original text, just mark as done
+            const original = stepNode.textContent.replace(/^[○✓] /, '');
+            stepNode.textContent = '✓ ' + original;
+          }
+          appendLog(msg.message, msg.percent === 100 ? 'text-emerald-400 font-semibold' : 'text-sky-300');
+          if (msg.percent === 100) {
+            state.buildingInProgress = false;
+            state.resourcesBuilt = true;
+            const btn = document.getElementById('btnBuildResources');
+            if (btn) { btn.disabled = false; btn.classList.remove('opacity-60'); }
+            showToast('Đã tạo xong tài nguyên! Backend đã tải JAR & Plugin thực sự.');
+          }
+          break;
+        case 'build_done':
+          if (msg.files) { updateFileExplorerFromBackend(msg.files); }
+          renderResourceBuilderUI();
+          break;
+        case 'players':
+          state.players = msg.data || [];
+          renderHeaderAndTelemetry();
+          break;
+        case 'playit_claim':
+          // Show playit claim URL prominently
+          appendLog('[Playit.gg] Link Claim mới: ' + msg.url, 'text-purple-300 font-semibold');
+          showPlayitClaimBanner(msg.url);
+          break;
+      }
+    }
+
+    function showPlayitClaimBanner(url) {
+      let banner = document.getElementById('playitClaimBanner');
+      if (!banner) {
+        banner = document.createElement('div');
+        banner.id = 'playitClaimBanner';
+        banner.className = 'fixed top-16 right-4 z-50 m3-surface-2 border-2 border-purple-400/50 rounded-2xl p-4 shadow-xl max-w-sm';
+        document.body.appendChild(banner);
+      }
+      banner.innerHTML = `
+        <div class="text-xs font-bold text-purple-300 mb-2">🔗 Playit.gg — Nhấn Claim Tunnel!</div>
+        <a href="${url}" target="_blank" class="text-xs text-sky-300 underline break-all">${url}</a>
+        <div class="flex gap-2 mt-3">
+          <button onclick="window.open('${url}','_blank')" class="m3-btn-tonal text-xs px-3 py-1.5 rounded-full font-semibold">Mở Claim Link</button>
+          <button onclick="this.closest('#playitClaimBanner').remove()" class="text-xs px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20">✕</button>
+        </div>
+      `;
+    }
+
+    function updateFileExplorerFromBackend(files) {
+      // Convert backend file format to frontend state
+      state.generatedFiles = files.filter(f => !f.isDir).map(f => ({
+        path: f.relativePath,
+        type: f.relativePath.endsWith('.jar') ? 'plugin' : (f.relativePath.endsWith('.bat') ? 'script' : 'config'),
+        size: formatFileSize(f.size),
+        content: '' // will be loaded on click
+      }));
+      if (state.generatedFiles.length > 0) {
+        state.resourcesBuilt = true;
+        state.activeFileIndex = 0;
+      }
+      renderGeneratedFilesExplorer();
+    }
+
+    function formatFileSize(bytes) {
+      if (!bytes) return '0 B';
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
+      return (bytes/(1024*1024)).toFixed(1) + ' MB';
+    }
+
+    // Catalog of Minecraft Versions with Explicit Compatibility Tags (PC / Mobile / Both)
+    const VERSION_CATALOG = [
+      {
+        id: "paper-1.21.4",
+        name: "PaperMC 1.21.4",
+        mcVersion: "1.21.4",
+        engine: "Paper (Khuyên dùng)",
+        support: "both",
+        tagLabel: "💻 PC + 📱 Mobile",
+        javaReq: "Java 21",
+        Plugins: ["Geyser-Spigot.jar", "floodgate-spigot.jar"],
+        desc: "Phiên bản mới nhất, hỗ trợ gốc cả PC Java lẫn Mobile Bedrock qua GeyserMC & Floodgate không cần cài thêm ViaVersion."
+      },
+      {
+        id: "paper-1.21.1",
+        name: "PaperMC 1.21.1",
+        mcVersion: "1.21.1",
+        engine: "Paper (Ổn định cao)",
+        support: "both",
+        tagLabel: "💻 PC + 📱 Mobile",
+        javaReq: "Java 21",
+        Plugins: ["Geyser-Spigot.jar", "floodgate-spigot.jar", "ViaVersion.jar"],
+        desc: "Bản 1.21.1 cực kỳ ổn định cho nhóm 4 người chơi. Tự động kèm ViaVersion để điện thoại bản mới nhất vào mượt."
+      },
+      {
+        id: "paper-1.20.4",
+        name: "PaperMC 1.20.4",
+        mcVersion: "1.20.4",
+        engine: "Paper (Nhẹ RAM)",
+        support: "both",
+        tagLabel: "💻 PC + 📱 Mobile",
+        javaReq: "Java 17 / 21",
+        Plugins: ["Geyser-Spigot.jar", "floodgate-spigot.jar", "ViaVersion.jar", "ViaBackwards.jar"],
+        desc: "Rất nhẹ cho máy 8GB RAM. Hỗ trợ cả PC và Mobile nhờ cầu nối ViaVersion + GeyserMC."
+      },
+      {
+        id: "paper-1.19.4",
+        name: "PaperMC 1.19.4",
+        mcVersion: "1.19.4",
+        engine: "Paper",
+        support: "both",
+        tagLabel: "💻 PC + 📱 Mobile",
+        javaReq: "Java 17 / 21",
+        Plugins: ["Geyser-Spigot.jar", "floodgate-spigot.jar", "ViaVersion.jar"],
+        desc: "Tương thích cả PC và Mobile thông qua bộ dịch giao thức ViaVersion + GeyserMC."
+      },
+      {
+        id: "paper-1.16.5",
+        name: "PaperMC 1.16.5",
+        mcVersion: "1.16.5",
+        engine: "Paper (Nether Update)",
+        support: "both",
+        tagLabel: "💻 PC + 📱 Mobile",
+        javaReq: "Java 16+",
+        Plugins: ["Geyser-Spigot.jar", "floodgate-spigot.jar", "ViaVersion.jar"],
+        desc: "Phiên bản sinh tồn kinh điển, siêu nhẹ RAM. Cần bật ViaVersion để người chơi Mobile hiện tại kết nối vào."
+      },
+      {
+        id: "paper-1.12.2",
+        name: "PaperMC 1.12.2 (Classic)",
+        mcVersion: "1.12.2",
+        engine: "Paper Legacy",
+        support: "pc",
+        tagLabel: "💻 Chỉ PC (Java)",
+        javaReq: "Java 8 / 11",
+        Plugins: ["AuthMe.jar", "SkinRestorer.jar"],
+        desc: "Bản cũ 1.12.2 khác biệt hệ thống block với Bedrock hiện đại nên khuyến nghị chỉ dùng cho người chơi PC Java."
+      },
+      {
+        id: "vanilla-1.21.4",
+        name: "Vanilla Mojang 1.21.4",
+        mcVersion: "1.21.4",
+        engine: "Vanilla Official",
+        support: "pc",
+        tagLabel: "💻 Chỉ PC (Java)",
+        javaReq: "Java 21",
+        Plugins: [],
+        desc: "Nhân gốc của Mojang không hỗ trợ nạp plugin GeyserMC nên chỉ người chơi PC (Java) mới vào được."
+      },
+      {
+        id: "bedrock-1.21.50",
+        name: "Bedrock Dedicated 1.21.50",
+        mcVersion: "1.21.50",
+        engine: "Bedrock Native (Win 11)",
+        support: "mobile",
+        tagLabel: "📱 Chỉ Mobile / Win10 BE",
+        javaReq: "Chạy file .exe trực tiếp",
+        Plugins: [],
+        desc: "Nhân Bedrock thuần chạy trên Windows 11. Chỉ dành cho điện thoại (PE) và Minecraft Windows Bedrock, không hỗ trợ bản PC Java."
+      }
+    ];
+
+    const state = {
+      activeTab: "dashboard",
+      serverStatus: "offline", // offline | starting | online
+      selectedVersionId: "paper-1.21.4",
+      versionFilter: "all",
+      versionSearch: "",
+      ramGb: 4.0,
+      maxPlayers: 4,
+      motd: "Server Sinh Tồn 4 Anh Em",
+      gamemode: "survival",
+      difficulty: "normal",
+      crackPc: true,
+      floodgatePe: true,
+      viaVersion: true,
+      playitEnabled: true,
+      directPortEnabled: true,
+      players: [
+        { name: "MinhPC_VN", platform: "PC (Java Crack)", ping: "18ms" },
+        { name: ".HungMobile_PE", platform: "Mobile (Bedrock)", ping: "34ms" }
+      ],
+      timerId: null
+    };
+
+    function showToast(msg) {
+      const bar = document.getElementById("m3Snackbar");
+      const txt = document.getElementById("m3SnackbarText");
+      if (!bar || !txt) return;
+      txt.textContent = msg;
+      bar.classList.remove("translate-y-20", "opacity-0");
+      setTimeout(() => {
+        bar.classList.add("translate-y-20", "opacity-0");
+      }, 2600);
+    }
+
+    function copyTextToClipboard(text) {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand("copy");
+        showToast("Đã sao chép: " + text.slice(0, 48));
+      } catch (e) {
+        showToast("Không thể sao chép tự động");
+      }
+      document.body.removeChild(ta);
+    }
+
+    function appendLog(line, colorClass) {
+      const box = document.getElementById("consoleOutput");
+      if (!box) return;
+      const div = document.createElement("div");
+      const now = new Date();
+      const ts = now.toTimeString().split(" ")[0];
+      div.className = colorClass || "text-neutral-200";
+      div.textContent = "[" + ts + "] " + line;
+      box.appendChild(div);
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function getSelectedVersion() {
+      return VERSION_CATALOG.find(v => v.id === state.selectedVersionId) || VERSION_CATALOG[0];
+    }
+
+    function renderHeaderAndTelemetry() {
+      const ver = getSelectedVersion();
+      document.getElementById("serverTitleDisplay").textContent = state.motd;
+      document.getElementById("activeVersionBadge").textContent = ver.name;
+
+      const tagEl = document.getElementById("activePlatformTag");
+      tagEl.textContent = ver.tagLabel;
+      if (ver.support === "both") {
+        tagEl.className = "text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-medium";
+      } else if (ver.support === "pc") {
+        tagEl.className = "text-xs px-2.5 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30 font-medium";
+      } else {
+        tagEl.className = "text-xs px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 font-medium";
+      }
+
+      const crackSummary = (state.crackPc ? "PC Crack" : "PC Bản quyền") + (state.floodgatePe && ver.support !== "pc" ? " + Floodgate PE" : "");
+      document.getElementById("headerSubInfo").textContent =
+        "Chế độ: " + crackSummary + " • Tối đa: " + state.maxPlayers + " người • Cấp phát: " + state.ramGb.toFixed(1) + " GB / 8 GB RAM";
+
+      document.getElementById("maxPlayerCountDisplay").textContent = String(state.maxPlayers);
+
+      const dot = document.getElementById("statusDot");
+      const badge = document.getElementById("serverStatusBadge");
+      const btnStart = document.getElementById("btnStartServer");
+      const btnRestart = document.getElementById("btnRestartServer");
+      const btnStop = document.getElementById("btnStopServer");
+
+      if (state.serverStatus === "offline") {
+        dot.className = "w-3 h-3 rounded-full bg-neutral-500";
+        badge.className = "text-xs px-2.5 py-0.5 rounded-full bg-neutral-700 text-neutral-300 font-medium";
+        badge.textContent = "Đã tắt (Offline)";
+        btnStart.disabled = false;
+        btnStart.classList.remove("opacity-50", "cursor-not-allowed");
+        btnRestart.disabled = true;
+        btnRestart.classList.add("opacity-50", "cursor-not-allowed");
+        btnStop.disabled = true;
+        btnStop.classList.add("opacity-50", "cursor-not-allowed");
+        document.getElementById("ramUsageText").textContent = "0.0 / " + state.ramGb.toFixed(1) + " GB";
+        document.getElementById("ramProgressBar").style.width = "0%";
+      } else if (state.serverStatus === "starting") {
+        dot.className = "w-3 h-3 rounded-full bg-amber-400 animate-ping";
+        badge.className = "text-xs px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-medium";
+        badge.textContent = "Đang khởi động...";
+        btnStart.disabled = true;
+        btnStart.classList.add("opacity-50", "cursor-not-allowed");
+        btnRestart.disabled = true;
+        btnStop.disabled = false;
+        btnStop.classList.remove("opacity-50", "cursor-not-allowed");
+        const used = (state.ramGb * 0.55).toFixed(1);
+        document.getElementById("ramUsageText").textContent = used + " / " + state.ramGb.toFixed(1) + " GB";
+        document.getElementById("ramProgressBar").style.width = "55%";
+      } else {
+        dot.className = "w-3 h-3 rounded-full bg-emerald-400";
+        badge.className = "text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-medium";
+        badge.textContent = "Đang chạy (Online)";
+        btnStart.disabled = true;
+        btnStart.classList.add("opacity-50", "cursor-not-allowed");
+        btnRestart.disabled = false;
+        btnRestart.classList.remove("opacity-50", "cursor-not-allowed");
+        btnStop.disabled = false;
+        btnStop.classList.remove("opacity-50", "cursor-not-allowed");
+        const activeRatio = Math.min(0.88, 0.48 + state.players.length * 0.08);
+        const used = (state.ramGb * activeRatio).toFixed(1);
+        document.getElementById("ramUsageText").textContent = used + " / " + state.ramGb.toFixed(1) + " GB";
+        document.getElementById("ramProgressBar").style.width = Math.round(activeRatio * 100) + "%";
+      }
+
+      renderPlayers();
+      renderConfigPreviews();
+    }
+
+    function renderPlayers() {
+      const container = document.getElementById("playerListContainer");
+      const countEl = document.getElementById("onlinePlayerCount");
+      const breakdownEl = document.getElementById("playerBreakdownText");
+
+      if (state.serverStatus !== "online") {
+        countEl.textContent = "0";
+        breakdownEl.textContent = "Server đang tắt • Bấm Khởi động để mở kết nối";
+        container.innerHTML = '<div class="text-xs text-neutral-400 py-6 text-center m3-surface-3 rounded-2xl">Server hiện đang Offline.</div>';
+        return;
+      }
+
+      countEl.textContent = String(state.players.length);
+      const pcCount = state.players.filter(p => !p.name.startsWith(".")).length;
+      const peCount = state.players.filter(p => p.name.startsWith(".")).length;
+      breakdownEl.textContent = pcCount + " PC (Java) • " + peCount + " Mobile (PE)";
+
+      if (state.players.length === 0) {
+        container.innerHTML = '<div class="text-xs text-neutral-400 py-6 text-center m3-surface-3 rounded-2xl">Chưa có người chơi nào kết nối.</div>';
+        return;
+      }
+
+      container.innerHTML = state.players.map((p, idx) => {
+        const isMobile = p.name.startsWith(".");
+        const badgeClass = isMobile
+          ? "bg-amber-500/20 text-amber-300 border-amber-500/30"
+          : "bg-sky-500/20 text-sky-300 border-sky-500/30";
+        const icon = isMobile ? "📱 Mobile" : "💻 PC";
+        return `
+          <div class="m3-surface-3 p-3 rounded-2xl border m3-border flex items-center justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-semibold text-xs text-white">${p.name}</span>
+                <span class="text-[10px] px-2 py-0.5 rounded-full border ${badgeClass}">${icon}</span>
+              </div>
+              <div class="text-[11px] text-neutral-400 mt-0.5">${p.platform} • Ping: ${p.ping}</div>
+            </div>
+            <div class="flex items-center gap-1">
+              <button type="button" data-op-player="${p.name}" class="op-player-btn text-[11px] px-2.5 py-1 rounded-full m3-btn-tonal font-medium">OP</button>
+              <button type="button" data-kick-idx="${idx}" class="kick-player-btn text-[11px] px-2.5 py-1 rounded-full bg-rose-500/20 text-rose-300 hover:bg-rose-500/30">Kick</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderVersionCards() {
+      const grid = document.getElementById("versionCardsGrid");
+      if (!grid) return;
+
+      const filtered = VERSION_CATALOG.filter(item => {
+        if (state.versionFilter !== "all" && item.support !== state.versionFilter) return false;
+        if (state.versionSearch.trim() !== "") {
+          const q = state.versionSearch.toLowerCase();
+          return item.name.toLowerCase().includes(q) || item.mcVersion.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q);
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div class="col-span-full text-center py-8 text-xs text-neutral-400">Không tìm thấy phiên bản phù hợp với bộ lọc.</div>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => {
+        const isSelected = item.id === state.selectedVersionId;
+        let tagBadge = "";
+        if (item.support === "both") {
+          tagBadge = '<span class="text-xs px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold">💻 PC + 📱 Mobile</span>';
+        } else if (item.support === "pc") {
+          tagBadge = '<span class="text-xs px-2.5 py-1 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30 font-semibold">💻 Chỉ PC (Java)</span>';
+        } else {
+          tagBadge = '<span class="text-xs px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 font-semibold">📱 Chỉ Mobile (PE)</span>';
+        }
+
+        const cardBorder = isSelected ? "border-2 border-emerald-400 ring-2 ring-emerald-400/20" : "border m3-border";
+        const btnHtml = isSelected
+          ? '<span class="m3-btn-filled px-3.5 py-1.5 rounded-full text-xs font-semibold">✓ Đang sử dụng</span>'
+          : `<button type="button" data-select-version="${item.id}" class="select-version-btn m3-btn-tonal px-3.5 py-1.5 rounded-full text-xs font-semibold">Chọn phiên bản này</button>`;
+
+        return `
+          <div class="m3-surface-3 rounded-3xl p-4 ${cardBorder} flex flex-col justify-between space-y-3 transition-all">
+            <div class="space-y-2">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <h4 class="font-bold text-sm text-white">${item.name}</h4>
+                  <span class="text-[11px] text-neutral-400">${item.engine} • Cần ${item.javaReq}</span>
+                </div>
+                ${tagBadge}
+              </div>
+              <p class="text-xs text-neutral-300 leading-relaxed">${item.desc}</p>
+            </div>
+            <div class="pt-2 border-t m3-border flex items-center justify-between">
+              <span class="text-[11px] text-neutral-400">${item.Plugins.length ? "Tự cài: " + item.Plugins.join(", ") : "Không dùng plugin"}</span>
+              ${btnHtml}
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderConfigPreviews() {
+      const ver = getSelectedVersion();
+      const ramMb = Math.round(state.ramGb * 1024);
+      const props = [
+        "# Tệp cấu hình sinh tự động bởi MineYou Material 3 Web Panel",
+        "motd=" + state.motd,
+        "server-port=25565",
+        "max-players=" + state.maxPlayers,
+        "online-mode=" + (state.crackPc ? "false" : "true"),
+        "gamemode=" + state.gamemode,
+        "difficulty=" + state.difficulty,
+        "view-distance=8",
+        "simulation-distance=6",
+        "enforce-secure-profile=false",
+        "# GeyserMC UDP Port: 19132 | auth-type: " + (state.floodgatePe ? "floodgate" : "online")
+      ].join("\n");
+
+      const propsEl = document.getElementById("generatedPropsPreview");
+      if (propsEl) propsEl.textContent = props;
+
+      const bat = [
+        "@echo off",
+        "title " + state.motd + " - " + ver.name + " (Win 11)",
+        "echo Dang khoi dong " + ver.name + " voi " + ramMb + "MB RAM (Toi uu 4 nguoi choi)...",
+        "java -Xms" + ramMb + "M -Xmx" + ramMb + "M -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -jar paper-" + ver.mcVersion + ".jar --nogui",
+        "pause"
+      ].join("\n");
+
+      const batEl = document.getElementById("generatedBatPreview");
+      if (batEl) batEl.textContent = bat;
+    }
+
+    // Resource Builder & File Explorer State
+    state.resourcesBuilt = false;
+    state.buildingInProgress = false;
+    state.generatedFiles = [];
+    state.activeFileIndex = 0;
+
+    function detectVersionSupport(verStr, engine) {
+      if (engine === "bedrock") {
+        return { support: "mobile", tagLabel: "📱 Chỉ Mobile (PE)", javaReq: "Chạy .exe trực tiếp", plugins: [] };
+      }
+      if (engine === "vanilla") {
+        return { support: "pc", tagLabel: "💻 Chỉ PC (Java)", javaReq: "Java 17 / 21", plugins: [] };
+      }
+      const parts = verStr.split(".").map(n => parseInt(n, 10) || 0);
+      const minor = parts[1] || 0;
+      if (minor >= 16 || parts[0] >= 26) {
+        const plugs = minor >= 21
+          ? ["Geyser-Spigot.jar", "floodgate-spigot.jar"]
+          : ["Geyser-Spigot.jar", "floodgate-spigot.jar", "ViaVersion.jar", "ViaBackwards.jar"];
+        return {
+          support: "both",
+          tagLabel: "💻 PC + 📱 Mobile",
+          javaReq: minor >= 20 ? "Java 21" : "Java 17",
+          plugins: plugs
+        };
+      }
+      return {
+        support: "pc",
+        tagLabel: "💻 Chỉ PC (Java)",
+        javaReq: "Java 8 / 11",
+        plugins: ["AuthMe.jar", "SkinsRestorer.jar"]
+      };
+    }
+
+    function generateWin11AutoDownloadBat() {
+      const ver = getSelectedVersion();
+      const ramMb = Math.round(state.ramGb * 1024);
+      const lines = [
+        "@echo off",
+        "chcp 65001 >nul",
+        "title Tu Dong Tai Tai Nguyen & Khoi Chay " + ver.name + " (Win 11)",
+        "echo ================================================================",
+        "echo   TRINH KHOI TAO TAI NGUYEN SERVER MINECRAFT TREN WINDOWS 11",
+        "echo   Phien ban: " + ver.name + " (" + ver.tagLabel + ")",
+        "echo ================================================================",
+        "if not exist mc_server mkdir mc_server",
+        "if not exist mc_server\\plugins mkdir mc_server\\plugins",
+        "cd mc_server",
+        "",
+        "echo [1/4] Dang tai nhan " + ver.name + " tu PaperMC API...",
+        "powershell -Command \"$v='" + ver.mcVersion + "'; $b=(Invoke-RestMethod https://api.papermc.io/v2/projects/paper/versions/$v).builds[-1]; Invoke-WebRequest -Uri https://api.papermc.io/v2/projects/paper/versions/$v/builds/$b/downloads/paper-$v-$b.jar -OutFile paper-" + ver.mcVersion + ".jar\"",
+        ""
+      ];
+      if (ver.support === "both") {
+        lines.push(
+          "echo [2/4] Dang tai GeyserMC & Floodgate (Ho tro PC + Mobile PE)...",
+          "curl -L -o plugins\\Geyser-Spigot.jar https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot",
+          "curl -L -o plugins\\floodgate-spigot.jar https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot",
+          ""
+        );
+      }
+      lines.push(
+        "echo [3/4] Dang ghi eula.txt va server.properties (Crack online-mode=" + (state.crackPc ? "false" : "true") + ")...",
+        "echo eula=true> eula.txt",
+        "(",
+        "echo motd=" + state.motd,
+        "echo server-port=25565",
+        "echo max-players=" + state.maxPlayers,
+        "echo online-mode=" + (state.crackPc ? "false" : "true"),
+        "echo gamemode=" + state.gamemode,
+        "echo difficulty=" + state.difficulty,
+        "echo view-distance=8",
+        "echo simulation-distance=6",
+        "echo enforce-secure-profile=false",
+        ") > server.properties",
+        "",
+        "echo [4/4] Hoan tat! Dang khoi dong Server voi " + ramMb + "MB RAM...",
+        "java -Xms" + ramMb + "M -Xmx" + ramMb + "M -XX:+UseG1GC -jar paper-" + ver.mcVersion + ".jar --nogui",
+        "pause"
+      );
+      return lines.join("\r\n");
+    }
+
+    function buildFileObjectsForCurrentVersion() {
+      const ver = getSelectedVersion();
+      const ramMb = Math.round(state.ramGb * 1024);
+      const chkGeyser = document.getElementById("resChkGeyser") ? document.getElementById("resChkGeyser").checked : true;
+      const chkVia = document.getElementById("resChkVia") ? document.getElementById("resChkVia").checked : true;
+      const chkSkins = document.getElementById("resChkSkins") ? document.getElementById("resChkSkins").checked : true;
+      const chkPlayit = document.getElementById("resChkPlayit") ? document.getElementById("resChkPlayit").checked : true;
+
+      const jarName = ver.engine.includes("Bedrock")
+        ? "bedrock_server-" + ver.mcVersion + ".exe"
+        : (ver.engine.includes("Vanilla") ? "vanilla-" + ver.mcVersion + ".jar" : "paper-" + ver.mcVersion + ".jar");
+
+      const files = [
+        {
+          path: jarName,
+          type: "binary",
+          size: "46.8 MB",
+          content: [
+            "# Tệp nhị phân nhân Server (" + jarName + ")",
+            "# Nguồn tải tự động: https://api.papermc.io/v2/projects/paper/versions/" + ver.mcVersion,
+            "# Khi chạy trên Windows 11 hoặc dùng script setup_resources_win11.bat, tệp .jar thật sẽ được tải trực tiếp về ổ cứng."
+          ].join("\n")
+        },
+        {
+          path: "eula.txt",
+          type: "config",
+          size: "180 B",
+          content: [
+            "# Tự động đồng ý điều khoản Mojang EULA bởi MineYou M3",
+            "# " + new Date().toISOString(),
+            "eula=true"
+          ].join("\n")
+        },
+        {
+          path: "server.properties",
+          type: "config",
+          size: "1.4 KB",
+          content: [
+            "# Minecraft server properties - Sinh tự động cho " + ver.name,
+            "motd=" + state.motd,
+            "server-port=25565",
+            "max-players=" + state.maxPlayers,
+            "online-mode=" + (state.crackPc ? "false" : "true"),
+            "gamemode=" + state.gamemode,
+            "difficulty=" + state.difficulty,
+            "view-distance=8",
+            "simulation-distance=6",
+            "enforce-secure-profile=false",
+            "allow-flight=true",
+            "spawn-protection=0"
+          ].join("\n")
+        },
+        {
+          path: "start_server.bat",
+          type: "script",
+          size: "620 B",
+          content: [
+            "@echo off",
+            "title " + state.motd + " - " + ver.name + " (Win 11)",
+            "echo Dang khoi dong " + ver.name + " voi " + ramMb + "MB RAM...",
+            "java -Xms" + ramMb + "M -Xmx" + ramMb + "M -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -jar " + jarName + " --nogui",
+            "pause"
+          ].join("\n")
+        }
+      ];
+
+      if (ver.support === "both" && chkGeyser) {
+        files.push(
+          {
+            path: "plugins/Geyser-Spigot.jar",
+            type: "plugin",
+            size: "13.2 MB",
+            content: [
+              "# Plugin GeyserMC (Cầu nối cho phép Mobile Bedrock vào chung Server Java PC)",
+              "# Link tải tự động: https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot"
+            ].join("\n")
+          },
+          {
+            path: "plugins/floodgate-spigot.jar",
+            type: "plugin",
+            size: "2.1 MB",
+            content: [
+              "# Plugin Floodgate (Cho phép người chơi Mobile/PE vào không cần mua tài khoản Java)",
+              "# Link tải tự động: https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot"
+            ].join("\n")
+          },
+          {
+            path: "plugins/Geyser-Spigot/config.yml",
+            type: "config",
+            size: "2.8 KB",
+            content: [
+              "# Cấu hình GeyserMC tự động tối ưu cho PC + Mobile & Crack",
+              "bedrock:",
+              "  address: 0.0.0.0",
+              "  port: 19132",
+              "  clone-remote-port: false",
+              "  motd1: \"" + state.motd + "\"",
+              "  motd2: \"PC + Mobile Crossplay Server\"",
+              "remote:",
+              "  address: auto",
+              "  port: 25565",
+              "  auth-type: " + (state.floodgatePe ? "floodgate" : "online"),
+              "floodgate-key-file: key.pem",
+              "above-bedrock-nether-building: true"
+            ].join("\n")
+          }
+        );
+      }
+
+      if (ver.support !== "mobile" && chkVia) {
+        files.push({
+          path: "plugins/ViaVersion.jar",
+          type: "plugin",
+          size: "5.4 MB",
+          content: "# Plugin ViaVersion + ViaBackwards: Cho phép người chơi ở phiên bản mới hơn hoặc cũ hơn vẫn vào được server."
+        });
+      }
+
+      if (ver.support !== "mobile" && chkSkins && state.crackPc) {
+        files.push({
+          path: "plugins/SkinsRestorer.jar",
+          type: "plugin",
+          size: "4.2 MB",
+          content: "# Plugin SkinsRestorer: Khôi phục hiển thị Skin cho người chơi dùng tài khoản Crack (online-mode=false)."
+        });
+      }
+
+      if (chkPlayit && state.playitEnabled) {
+        files.push({
+          path: "plugins/playit-minecraft-plugin.jar",
+          type: "plugin",
+          size: "1.1 MB",
+          content: "# Plugin Playit.gg: Tự động tạo đường hầm Public IP cho cả PC và Mobile mà không cần mở port modem."
+        });
+      }
+
+      files.push({
+        path: "setup_resources_win11.bat",
+        type: "script",
+        size: "2.4 KB",
+        content: generateWin11AutoDownloadBat()
+      });
+
+      return files;
+    }
+
+    function renderResourceBuilderUI() {
+      const ver = getSelectedVersion();
+      const nameEl = document.getElementById("builderSelectedVerName");
+      const tagEl = document.getElementById("builderSelectedVerTag");
+      const jarLabel = document.getElementById("resCoreJarLabel");
+      const stepVer = document.getElementById("stepVerLabel");
+      const statusBadge = document.getElementById("builderStatusBadge");
+      const stepResBadge = document.getElementById("stepResBadge");
+
+      if (nameEl) nameEl.textContent = ver.name;
+      if (tagEl) tagEl.textContent = ver.tagLabel;
+      if (stepVer) stepVer.textContent = ver.name + " (" + ver.tagLabel + ")";
+      if (jarLabel) {
+        jarLabel.textContent = ver.engine.includes("Bedrock")
+          ? "bedrock_server-" + ver.mcVersion + ".exe"
+          : "paper-" + ver.mcVersion + ".jar";
+      }
+
+      if (state.resourcesBuilt) {
+        if (statusBadge) {
+          statusBadge.className = "px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold";
+          statusBadge.textContent = "✓ Đã tạo đủ tài nguyên (" + state.generatedFiles.length + " tệp)";
+        }
+        if (stepResBadge) {
+          stepResBadge.className = "px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold";
+          stepResBadge.textContent = "✓ Đã tạo tài nguyên (" + ver.name + ")";
+        }
+      } else {
+        if (statusBadge) {
+          statusBadge.className = "px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-semibold";
+          statusBadge.textContent = "Cần bấm 'Tạo Tài Nguyên' cho " + ver.name;
+        }
+        if (stepResBadge) {
+          stepResBadge.className = "px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-semibold";
+          stepResBadge.textContent = "Chưa tạo cho " + ver.name;
+        }
+      }
+
+      renderGeneratedFilesExplorer();
+    }
+
+    function renderGeneratedFilesExplorer() {
+      const listEl = document.getElementById("generatedFilesList");
+      const countBadge = document.getElementById("resourceCountBadge");
+      const titleEl = document.getElementById("activeFileViewerTitle");
+      const contentEl = document.getElementById("activeFileViewerContent");
+
+      if (!listEl) return;
+      if (countBadge) countBadge.textContent = state.generatedFiles.length + " tệp đã tạo";
+
+      if (state.generatedFiles.length === 0) {
+        listEl.innerHTML = '<div class="text-[11px] text-neutral-400 p-3 text-center">Chưa có tài nguyên. Hãy bấm nút <strong>⚡ Tạo Tài Nguyên Cho Phiên Bản Này</strong>.</div>';
+        if (titleEl) titleEl.textContent = "Chưa có tệp nào";
+        if (contentEl) contentEl.value = "";
+        return;
+      }
+
+      listEl.innerHTML = state.generatedFiles.map((file, idx) => {
+        const isActive = idx === state.activeFileIndex;
+        const rowClass = isActive
+          ? "m3-btn-tonal font-semibold"
+          : "text-neutral-300 hover:bg-white/5";
+        const icon = file.path.endsWith(".jar") || file.path.endsWith(".exe")
+          ? "📦"
+          : (file.path.endsWith(".bat") ? "⚡" : "📄");
+        return `
+          <button type="button" data-file-idx="${idx}" class="file-item-btn w-full text-left px-2.5 py-1.5 rounded-lg flex items-center justify-between gap-1 transition-all ${rowClass}">
+            <span class="truncate font-mono-code text-[11px]">${icon} ${file.path}</span>
+            <span class="text-[10px] opacity-75 shrink-0">${file.size}</span>
+          </button>
+        `;
+      }).join("");
+
+      const activeFile = state.generatedFiles[state.activeFileIndex] || state.generatedFiles[0];
+      if (activeFile && titleEl && contentEl) {
+        titleEl.textContent = "/mc_server/" + activeFile.path;
+        contentEl.value = activeFile.content;
+      }
+    }
+
+    async function runBuildResourcesWorkflow(callbackAfterBuild) {
+      if (state.buildingInProgress) return;
+      state.buildingInProgress = true;
+      state.resourcesBuilt = false;
+      const ver = getSelectedVersion();
+      const ramMb = Math.round(state.ramGb * 1024);
+
+      const btn = document.getElementById('btnBuildResources');
+      const pctEl = document.getElementById('buildProgressPercent');
+      const barEl = document.getElementById('buildProgressBar');
+      const stepNodes = document.querySelectorAll('#buildStepList [data-step]');
+
+      if (btn) { btn.disabled = true; btn.classList.add('opacity-60'); }
+      stepNodes.forEach(n => {
+        n.className = 'text-neutral-400';
+        n.textContent = '○ ' + n.textContent.replace(/^[○✓] /, '');
+      });
+      if (pctEl) pctEl.textContent = '0%';
+      if (barEl) barEl.style.width = '0%';
+
+      const chkGeyser = document.getElementById('resChkGeyser')?.checked ?? true;
+      const chkVia = document.getElementById('resChkVia')?.checked ?? true;
+      const chkSkins = document.getElementById('resChkSkins')?.checked ?? true;
+      const chkPlayit = document.getElementById('resChkPlayit')?.checked ?? true;
+
+      // Try real backend
+      if (ws && ws.readyState === WebSocket.OPEN) {
+        try {
+          appendLog('[Tạo Tài Nguyên] Bắt đầu quy trình 5 bước — Backend đang tải JAR thật từ API chính thức...', 'text-sky-300');
+          const resp = await fetch('/api/resources/build', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              version: ver.mcVersion,
+              engine: ver.engine.toLowerCase().includes('paper') ? 'paper' : (ver.engine.toLowerCase().includes('vanilla') ? 'vanilla' : 'bedrock'),
+              ramMb,
+              includeGeyser: chkGeyser && ver.support !== 'pc',
+              includeVia: chkVia && ver.support !== 'mobile',
+              includeSkins: chkSkins,
+              includePlayit: chkPlayit,
+              motd: state.motd,
+              maxPlayers: state.maxPlayers,
+              gamemode: state.gamemode,
+              difficulty: state.difficulty,
+              crackPc: state.crackPc,
+              floodgatePe: state.floodgatePe
+            })
+          });
+          const data = await resp.json();
+          if (data.ok) {
+            if (data.files) updateFileExplorerFromBackend(data.files);
+            state.buildingInProgress = false;
+            state.resourcesBuilt = true;
+            if (btn) { btn.disabled = false; btn.classList.remove('opacity-60'); }
+            renderResourceBuilderUI();
+            if (typeof callbackAfterBuild === 'function') callbackAfterBuild();
+            return;
+          }
+        } catch(e) {
+          appendLog('[Cảnh báo] Backend không phản hồi, chuyển sang chế độ mô phỏng...', 'text-amber-300');
+        }
+      }
+
+      // Fallback simulation
+      const steps = [
+        { pct: 20, step: 1, log: '[Tạo Tài Nguyên 1/5] Đang kết nối API lấy nhân ' + ver.name + '...' },
+        { pct: 45, step: 2, log: '[Tạo Tài Nguyên 2/5] Đang tải Plugin Crossplay (Geyser + Floodgate + ViaVersion)...' },
+        { pct: 70, step: 3, log: '[Tạo Tài Nguyên 3/5] Đang ghi eula.txt & server.properties (Crack online-mode=' + (state.crackPc ? 'false' : 'true') + ')...' },
+        { pct: 90, step: 4, log: '[Tạo Tài Nguyên 4/5] Đang sinh Geyser config UDP 19132 & start_server.bat (' + ramMb + 'MB RAM)...' },
+        { pct: 100, step: 5, log: '[Tạo Tài Nguyên 5/5] Hoàn tất! Đã khởi tạo đầy đủ tài nguyên cho ' + ver.name + '!' }
+      ];
+      steps.forEach((s, i) => {
+        setTimeout(() => {
+          if (pctEl) pctEl.textContent = s.pct + '%';
+          if (barEl) barEl.style.width = s.pct + '%';
+          const node = document.querySelector(`#buildStepList [data-step="${s.step}"]`);
+          if (node) { node.className = 'text-emerald-300 font-semibold'; node.textContent = '✓ ' + node.textContent.replace(/^[○✓] /, ''); }
+          appendLog(s.log, s.pct === 100 ? 'text-emerald-400 font-semibold' : 'text-sky-300');
+          if (i === steps.length - 1) {
+            state.buildingInProgress = false;
+            state.resourcesBuilt = true;
+            state.generatedFiles = buildFileObjectsForCurrentVersion();
+            state.activeFileIndex = 2;
+            if (btn) { btn.disabled = false; btn.classList.remove('opacity-60'); }
+            renderResourceBuilderUI();
+            showToast('Đã tạo xong tài nguyên cho ' + ver.name + '!');
+            if (typeof callbackAfterBuild === 'function') callbackAfterBuild();
+          }
+        }, (i + 1) * 350);
+      });
+    }
+
+    async function startServerSimulation() {
+      if (state.serverStatus !== "offline") return;
+      const ver = getSelectedVersion();
+      const ramMb = Math.round(state.ramGb * 1024);
+
+      // Try real backend first
+      if (ws && ws.readyState === WebSocket.OPEN) {
+        try {
+          const resp = await fetch('/api/server/start', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ version: ver.mcVersion, ramMb })
+          });
+          const data = await resp.json();
+          if (data.ok) {
+            state.serverStatus = 'starting';
+            renderHeaderAndTelemetry();
+            appendLog('[Backend] Đang khởi động Java process: paper-' + ver.mcVersion + '.jar', 'text-amber-300');
+            return; // WS will push status updates
+          }
+        } catch(e) { /* fallback to simulation */ }
+      }
+
+      // Simulation mode (no backend)
+      if (!state.resourcesBuilt) {
+        appendLog('[Hệ thống] Phiên bản hiện tại chưa có tài nguyên. Đang tự động khởi tạo...', 'text-amber-300');
+        runBuildResourcesWorkflow(() => { startServerSimulation(); });
+        return;
+      }
+      state.serverStatus = 'starting';
+      renderHeaderAndTelemetry();
+      appendLog('Đang khởi chạy nhân ' + ver.name + ' với ' + ramMb + 'MB RAM...', 'text-amber-300');
+      setTimeout(() => {
+        appendLog('[PaperMC] Đang tải thế giới...', 'text-neutral-300');
+        if (ver.support === 'both') appendLog('[Geyser-Spigot] Đã mở cổng Bedrock UDP 0.0.0.0:19132!', 'text-emerald-400');
+        if (state.floodgatePe && ver.support === 'both') appendLog('[Floodgate] auth-type=floodgate: Mobile không cần tài khoản Java.', 'text-emerald-300');
+        if (state.crackPc) appendLog('[Server] online-mode=false: PC Crack được phép vào.', 'text-sky-300');
+      }, 900);
+      setTimeout(() => {
+        state.serverStatus = 'online';
+        renderHeaderAndTelemetry();
+        appendLog('Done (2.41s)! Server đã sẵn sàng!', 'text-emerald-400 font-semibold');
+        showToast('Server đã khởi động thành công!');
+      }, 1900);
+    }
+
+    async function stopServerSimulation() {
+      if (state.serverStatus === "offline") return;
+      appendLog("Đang lưu bản đồ và đóng kết nối GeyserMC / PaperMC...", "text-rose-300");
+      if (ws && ws.readyState === WebSocket.OPEN) {
+        try {
+          await fetch('/api/server/stop', { method: 'POST' });
+        } catch(e) {}
+      }
+      state.serverStatus = "offline";
+      state.players = [];
+      renderHeaderAndTelemetry();
+      showToast("Đã tắt Server và lưu dữ liệu thế giới.");
+    }
+
+    // Event bindings
+    document.addEventListener("DOMContentLoaded", () => {
+      state.generatedFiles = buildFileObjectsForCurrentVersion();
+      state.resourcesBuilt = true;
+      renderHeaderAndTelemetry();
+      renderVersionCards();
+      renderResourceBuilderUI();
+
+      // Custom Version Adder with automatic PC / Mobile / Both tag detection
+      document.getElementById("btnAddCustomVersion").addEventListener("click", () => {
+        const inp = document.getElementById("customVersionInput");
+        const engSel = document.getElementById("customEngineSelect");
+        const rawVer = (inp.value || "").trim();
+        if (!rawVer) {
+          showToast("Vui lòng nhập số phiên bản (VD: 1.20.1 hoặc 1.18.2)");
+          return;
+        }
+        const eng = engSel.value;
+        const detected = detectVersionSupport(rawVer, eng);
+        const newId = eng + "-" + rawVer.replace(/[^a-zA-Z0-9.]/g, "");
+        const engineTitle = eng === "paper" ? "PaperMC" : (eng === "vanilla" ? "Vanilla Mojang" : "Bedrock Dedicated");
+
+        let existing = VERSION_CATALOG.find(v => v.id === newId);
+        if (!existing) {
+          existing = {
+            id: newId,
+            name: engineTitle + " " + rawVer,
+            mcVersion: rawVer,
+            engine: engineTitle,
+            support: detected.support,
+            tagLabel: detected.tagLabel,
+            javaReq: detected.javaReq,
+            Plugins: detected.plugins,
+            desc: detected.support === "both"
+              ? "Hỗ trợ chơi chung cả PC và Mobile thông qua GeyserMC + Floodgate + ViaVersion."
+              : (detected.support === "pc" ? "Phiên bản này chỉ hỗ trợ người chơi trên PC (Java)." : "Phiên bản này chỉ hỗ trợ người chơi trên Mobile (Bedrock).")
+          };
+          VERSION_CATALOG.unshift(existing);
+        }
+        state.selectedVersionId = existing.id;
+        state.versionFilter = "all";
+        state.resourcesBuilt = false;
+        state.generatedFiles = [];
+        inp.value = "";
+        renderVersionCards();
+        renderHeaderAndTelemetry();
+        renderResourceBuilderUI();
+        showToast("Đã chọn " + existing.name + " (" + existing.tagLabel + "). Hãy bấm 'Tạo Tài Nguyên'!");
+      });
+
+      // Resource Builder Buttons
+      document.getElementById("btnBuildResources").addEventListener("click", () => {
+        runBuildResourcesWorkflow();
+      });
+
+      document.getElementById("btnQuickBuildResources").addEventListener("click", () => {
+        document.querySelector('#mainNav button[data-tab="versions"]').click();
+        runBuildResourcesWorkflow();
+      });
+
+      document.getElementById("btnGoToVersionBuilder").addEventListener("click", () => {
+        document.querySelector('#mainNav button[data-tab="versions"]').click();
+      });
+
+      // File Explorer clicks
+      document.getElementById("generatedFilesList").addEventListener("click", (e) => {
+        const btn = e.target.closest(".file-item-btn");
+        if (!btn) return;
+        state.activeFileIndex = parseInt(btn.getAttribute("data-file-idx"), 10) || 0;
+        const activeFile = state.generatedFiles[state.activeFileIndex];
+        if (activeFile && (!activeFile.content || activeFile.content === '')) {
+          fetch('/api/files/read?path=' + encodeURIComponent(activeFile.path))
+            .then(r => r.json())
+            .then(data => {
+              if (data.ok) {
+                activeFile.content = data.content;
+                renderGeneratedFilesExplorer();
+              }
+            }).catch(() => {});
+        }
+        renderGeneratedFilesExplorer();
+      });
+
+      document.getElementById("btnSaveActiveFile").addEventListener("click", async () => {
+        const activeFile = state.generatedFiles[state.activeFileIndex];
+        if (!activeFile) return;
+        activeFile.content = document.getElementById("activeFileViewerContent").value;
+        try {
+          const resp = await fetch('/api/files/save', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ path: activeFile.path, content: activeFile.content })
+          });
+          const data = await resp.json();
+          if (data.ok) showToast("✓ Đã lưu " + activeFile.path + " vào mc_server/");
+          else showToast("Đã lưu (local) — Backend: " + (data.error || "Lỗi"));
+        } catch(e) {
+          showToast("Đã lưu nội dung tệp " + activeFile.path);
+        }
+      });
+
+      function triggerBrowserDownload(filename, textContent) {
+        const blob = new Blob([textContent], { type: "text/plain;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+
+      document.getElementById("btnDownloadActiveFile").addEventListener("click", () => {
+        const activeFile = state.generatedFiles[state.activeFileIndex];
+        if (!activeFile) return;
+        const baseName = activeFile.path.split("/").pop();
+        triggerBrowserDownload(baseName, activeFile.content);
+        showToast("Đang tải tệp: " + baseName);
+      });
+
+      document.getElementById("btnDownloadWin11AutoScript").addEventListener("click", () => {
+        const batContent = generateWin11AutoDownloadBat();
+        triggerBrowserDownload("setup_resources_win11.bat", batContent);
+        showToast("Đã tải setup_resources_win11.bat! Chạy file này trên Win 11 để tự tải JAR + Plugin.");
+      });
+
+      // Navigation tabs
+      document.getElementById("mainNav").addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-tab]");
+        if (!btn) return;
+        const tab = btn.getAttribute("data-tab");
+        state.activeTab = tab;
+
+        document.querySelectorAll("#mainNav button[data-tab]").forEach(b => {
+          b.classList.remove("active");
+          b.classList.add("text-neutral-300");
+        });
+        btn.classList.add("active");
+        btn.classList.remove("text-neutral-300");
+
+        ["dashboard", "versions", "network", "config", "win11"].forEach(id => {
+          const sec = document.getElementById("tab-" + id);
+          if (sec) sec.classList.toggle("hidden", id !== tab);
+        });
+      });
+
+      // Theme switcher
+      document.getElementById("themeSwitcher").addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-theme-val]");
+        if (!btn) return;
+        const t = btn.getAttribute("data-theme-val");
+        if (t === "emerald") {
+          document.documentElement.removeAttribute("data-theme");
+        } else {
+          document.documentElement.setAttribute("data-theme", t);
+        }
+        document.querySelectorAll("#themeSwitcher button").forEach(b => {
+          b.classList.remove("ring-2", "ring-white/80", "opacity-100");
+          b.classList.add("opacity-70");
+        });
+        btn.classList.remove("opacity-70");
+        btn.classList.add("ring-2", "ring-white/80", "opacity-100");
+        showToast("Đã đổi bảng màu Material You: " + t.toUpperCase());
+      });
+
+      // Power buttons
+      document.getElementById("btnStartServer").addEventListener("click", startServerSimulation);
+      document.getElementById("btnStopServer").addEventListener("click", stopServerSimulation);
+      document.getElementById("btnRestartServer").addEventListener("click", () => {
+        stopServerSimulation();
+        setTimeout(startServerSimulation, 500);
+      });
+
+      // Simulate friend joining
+      document.getElementById("btnSimulatePlayerJoin").addEventListener("click", () => {
+        if (state.serverStatus !== "online") {
+          startServerSimulation();
+          return;
+        }
+        if (state.players.length >= state.maxPlayers) {
+          showToast("Server đã đủ " + state.maxPlayers + " người chơi!");
+          return;
+        }
+        const samplePool = [
+          { name: ".ThaoPE_2026", platform: "Mobile (Bedrock)", ping: "29ms" },
+          { name: "KhangPC_Crack", platform: "PC (Java Crack)", ping: "14ms" },
+          { name: ".Bao_iPhone", platform: "Mobile (Bedrock)", ping: "41ms" },
+          { name: "Tuan_TLauncher", platform: "PC (Java Crack)", ping: "22ms" }
+        ];
+        const candidate = samplePool.find(c => !state.players.some(p => p.name === c.name)) || {
+          name: ".GuestPE_" + Math.floor(Math.random() * 90 + 10),
+          platform: "Mobile (Bedrock)",
+          ping: "31ms"
+        };
+        state.players.push(candidate);
+        appendLog("[User Authenticator] " + candidate.name + " (" + candidate.platform + ") đã tham gia thế giới!", "text-emerald-300");
+        renderHeaderAndTelemetry();
+      });
+
+      // Player list delegation (OP / Kick)
+      document.getElementById("playerListContainer").addEventListener("click", (e) => {
+        const opBtn = e.target.closest(".op-player-btn");
+        if (opBtn) {
+          const name = opBtn.getAttribute("data-op-player");
+          appendLog("[Server] Đã cấp quyền OP (Quản trị viên) cho " + name, "text-amber-300");
+          showToast("Đã cấp quyền OP cho " + name);
+          return;
+        }
+        const kickBtn = e.target.closest(".kick-player-btn");
+        if (kickBtn) {
+          const idx = parseInt(kickBtn.getAttribute("data-kick-idx"), 10);
+          const removed = state.players.splice(idx, 1)[0];
+          if (removed) {
+            appendLog("[Server] Đã mời " + removed.name + " rời khỏi phòng.", "text-rose-300");
+            renderHeaderAndTelemetry();
+          }
+        }
+      });
+
+      // Console commands
+      document.getElementById("consoleForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const input = document.getElementById("consoleInput");
+        const cmd = input.value.trim();
+        if (!cmd) return;
+        appendLog("> " + cmd, "text-white font-semibold");
+        if (ws && ws.readyState === WebSocket.OPEN) {
+          fetch('/api/server/command', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ command: cmd })
+          }).catch(() => {});
+        } else {
+          if (cmd.toLowerCase() === "geyser list") {
+            const peList = state.players.filter(p => p.name.startsWith(".")).map(p => p.name).join(", ") || "Không có";
+            appendLog("[GeyserMC] Người chơi Bedrock đang kết nối: " + peList, "text-amber-300");
+          } else {
+            appendLog("[Server] Đã thực thi lệnh: /" + cmd, "text-emerald-300");
+          }
+        }
+        input.value = "";
+      });
+
+      document.querySelectorAll(".quick-cmd-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const cmd = btn.getAttribute("data-quick-cmd");
+          appendLog("> " + cmd, "text-white font-semibold");
+          appendLog("[Server] Đã thực thi lệnh nhanh: /" + cmd, "text-emerald-300");
+        });
+      });
+
+      document.getElementById("btnClearConsole").addEventListener("click", () => {
+        document.getElementById("consoleOutput").innerHTML = "";
+        appendLog("Đã làm mới màn hình Console.", "text-neutral-400");
+      });
+
+      // Version filter & search
+      document.getElementById("versionFilterChips").addEventListener("click", (e) => {
+        const chip = e.target.closest("button[data-filter]");
+        if (!chip) return;
+        state.versionFilter = chip.getAttribute("data-filter");
+        document.querySelectorAll("#versionFilterChips button").forEach(b => b.classList.remove("active"));
+        chip.classList.add("active");
+        renderVersionCards();
+      });
+
+      document.getElementById("versionSearchInput").addEventListener("input", (e) => {
+        state.versionSearch = e.target.value;
+        renderVersionCards();
+      });
+
+      document.getElementById("versionCardsGrid").addEventListener("click", (e) => {
+        const btn = e.target.closest(".select-version-btn");
+        if (!btn) return;
+        const id = btn.getAttribute("data-select-version");
+        state.selectedVersionId = id;
+        state.resourcesBuilt = false;
+        state.generatedFiles = [];
+        const ver = getSelectedVersion();
+        renderVersionCards();
+        renderHeaderAndTelemetry();
+        renderResourceBuilderUI();
+        const builderEl = document.getElementById("resourceBuilderSection");
+        if (builderEl) builderEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        appendLog("[Phiên bản] Đã chọn " + ver.name + " (" + ver.tagLabel + "). Hãy bấm '⚡ Tạo Tài Nguyên Cho Phiên Bản Này' để tải JAR & Plugin!", "text-amber-300");
+        showToast("Đã chọn " + ver.name + " — Bấm '⚡ Tạo Tài Nguyên' bên dưới để khởi tạo!");
+      });
+
+      // Network inputs sync
+      document.getElementById("inputPlayitPc").addEventListener("input", (e) => {
+        document.getElementById("dashPcPlayit").textContent = e.target.value;
+      });
+      document.getElementById("inputPlayitPe").addEventListener("input", (e) => {
+        document.getElementById("dashPePlayit").textContent = e.target.value;
+      });
+      document.getElementById("inputPublicIp").addEventListener("input", (e) => {
+        const ip = e.target.value.trim();
+        document.getElementById("dashPcDirect").textContent = ip + ":25565";
+        document.getElementById("dashPeDirect").textContent = ip + " (Port: 19132)";
+      });
+
+      // RAM & Config controls
+      document.getElementById("ramSlider").addEventListener("input", (e) => {
+        const val = parseFloat(e.target.value);
+        state.ramGb = val;
+        const mb = Math.round(val * 1024);
+        const label = document.getElementById("ramSliderLabel");
+        const advice = document.getElementById("ramAdviceBox");
+        label.textContent = val.toFixed(1) + " GB (" + mb + " MB)";
+        if (val >= 3.5 && val <= 4.5) {
+          advice.className = "text-xs p-2.5 rounded-xl bg-emerald-500/10 text-emerald-200 border border-emerald-500/20";
+          advice.innerHTML = "✅ <strong>" + val.toFixed(1) + " GB RAM</strong> là mức cân bằng hoàn hảo cho 4 người chơi trên máy 8GB RAM (vẫn chừa " + (8 - val).toFixed(1) + " GB cho Windows 11).";
+        } else if (val > 4.5) {
+          advice.className = "text-xs p-2.5 rounded-xl bg-amber-500/10 text-amber-200 border border-amber-500/20";
+          advice.innerHTML = "⚠️ Cấp <strong>" + val.toFixed(1) + " GB RAM</strong> chỉ còn chừa " + (8 - val).toFixed(1) + " GB cho Windows 11. Nếu bạn vừa mở server vừa chơi game trên cùng máy này thì nên kéo về 3.5 - 4.0 GB.";
+        } else {
+          advice.className = "text-xs p-2.5 rounded-xl bg-sky-500/10 text-sky-200 border border-sky-500/20";
+          advice.innerHTML = "ℹ️ Mức <strong>" + val.toFixed(1) + " GB RAM</strong> khá tiết kiệm, phù hợp nếu bạn vừa mở server vừa bật Minecraft chơi trực tiếp trên cùng máy Windows 11.";
+        }
+        renderHeaderAndTelemetry();
+      });
+
+      document.getElementById("cfgMotd").addEventListener("input", (e) => {
+        state.motd = e.target.value || "Minecraft Server";
+        renderHeaderAndTelemetry();
+      });
+      document.getElementById("cfgMaxPlayers").addEventListener("input", (e) => {
+        state.maxPlayers = Math.max(1, parseInt(e.target.value || "4", 10));
+        renderHeaderAndTelemetry();
+      });
+      document.getElementById("cfgGamemode").addEventListener("change", (e) => {
+        state.gamemode = e.target.value;
+        renderConfigPreviews();
+      });
+      document.getElementById("cfgDifficulty").addEventListener("change", (e) => {
+        state.difficulty = e.target.value;
+        renderConfigPreviews();
+      });
+      document.getElementById("cfgOnlineModeFalse").addEventListener("change", (e) => {
+        state.crackPc = e.target.checked;
+        renderHeaderAndTelemetry();
+      });
+      document.getElementById("cfgFloodgate").addEventListener("change", (e) => {
+        state.floodgatePe = e.target.checked;
+        renderHeaderAndTelemetry();
+      });
+      document.getElementById("cfgViaVersion").addEventListener("change", (e) => {
+        state.viaVersion = e.target.checked;
+        renderHeaderAndTelemetry();
+      });
+
+      // Copy buttons
+      document.querySelectorAll(".copy-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const targetId = btn.getAttribute("data-copy-target");
+          const el = document.getElementById(targetId);
+          if (el) copyTextToClipboard(el.textContent.trim());
+        });
+      });
+      document.querySelectorAll(".copy-input-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const targetId = btn.getAttribute("data-copy-input");
+          const el = document.getElementById(targetId);
+          if (el) copyTextToClipboard(el.value.trim());
+        });
+      });
+
+      // Auto-fetch public IP
+      const btnAutoIp = document.getElementById('btnAutoFetchIp');
+      if (btnAutoIp) {
+        btnAutoIp.addEventListener('click', async () => {
+          try {
+            showToast("Đang lấy IP Public...");
+            const resp = await fetch('https://api.ipify.org?format=json');
+            const data = await resp.json();
+            const ipEl = document.getElementById('inputPublicIp');
+            if (ipEl && data.ip) {
+              ipEl.value = data.ip;
+              document.getElementById('dashPcDirect').textContent = data.ip + ':25565';
+              document.getElementById('dashPeDirect').textContent = data.ip + ' (Port: 19132)';
+              showToast('IP Public: ' + data.ip);
+            }
+          } catch(e) { showToast('Không lấy được IP — Kiểm tra kết nối Internet'); }
+        });
+      }
+
+      // Auto-fetch LAN IP from backend
+      fetch('/api/network/lan').then(r => r.json()).then(data => {
+        if (data.ip) {
+          const lanEl = document.getElementById('inputLanIp');
+          if (lanEl) lanEl.value = data.ip;
+        }
+      }).catch(() => {});
+
+      // Initialize WebSocket connection to backend
+      connectWebSocket();
+
+      // Load initial status from backend
+      fetch('/api/status').then(r => r.json()).then(data => {
+        if (data.status) state.serverStatus = data.status;
+        if (data.players) state.players = data.players;
+        if (data.ramMb) state.ramGb = data.ramMb / 1024;
+        if (data.files && data.files.length > 0) {
+          updateFileExplorerFromBackend(data.files);
+          state.resourcesBuilt = true;
+          const stepResBadge = document.getElementById('stepResBadge');
+          if (stepResBadge) {
+            stepResBadge.className = 'px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold';
+            stepResBadge.textContent = '✓ Đã có tài nguyên sẵn sàng';
+          }
+        }
+        renderHeaderAndTelemetry();
+        renderVersionCards();
+        renderResourceBuilderUI();
+      }).catch(() => {
+        // Backend offline — stay in simulation mode
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+bedrock:
+  port: 19132
+  clone-remote-port: false
+  motd1: "Server Sinh Ton 4 Anh Em"
+  motd2: "MineYou M3"
+  server-name: "MineYou M3"
+remote:
+  address: auto
+  port: 25565
+  auth-type: floodgate
+above-bedrock-nether-building: true
+emote-offhand-workaround: disabled
+metrics:
+  enabled: false

@@ -1,0 +1,20 @@
+{
+  "name": "mineyou-m3-win11-panel",
+  "version": "1.0.0",
+  "description": "MineYou M3 — Web Control Panel tự host Minecraft Server trên Windows 11 (PC + Mobile Crossplay + Crack). Material Design 3 UI.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["minecraft", "server", "panel", "material-design-3", "geysermc", "crossplay", "crack", "windows11"],
+  "author": "MineYou M3",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/mineyou-m3-win11-panel"
+  }
+}
